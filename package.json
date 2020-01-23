@@ -18,7 +18,8 @@
     "strengthchecker",
     "checkpasswordstrength"
   ],
-  "author": "dvincent333",
+  "author": "deanilvincent",
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/deanilvincent/check-password-strength/issues"
