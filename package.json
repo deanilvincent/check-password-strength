@@ -1,0 +1,27 @@
+{
+  "name": "check-password-strength",
+  "version": "1.0.0",
+  "description": "Password strength checker based from Javascript RegExp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deanilvincent/check-password-strength.git"
+  },
+  "keywords": [
+    "npm",
+    "password",
+    "strength",
+    "checker",
+    "strengthchecker",
+    "checkpasswordstrength"
+  ],
+  "author": "dvincent333",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/deanilvincent/check-password-strength/issues"
+  },
+  "homepage": "https://github.com/deanilvincent/check-password-strength#readme"
+}
