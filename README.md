@@ -19,7 +19,6 @@ console.log(passwordStrength('Asdfasdf2020').value)
 
 console.log(passwordStrength('A@2asdF2020!!*').value)
 // Strong
-
 ```
 
 ## Additional Info
@@ -33,7 +32,7 @@ console.log(passwordStrength('A@2asdF2020!!*').value)
 
 ```
 console.log(passwordStrength('Asdfasdf2020'))
-// { id: 1, value: 'Weak' }
+// { id: 1, "value": "Medium" }
 ```
 
 ### RegEx 

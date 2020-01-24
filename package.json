@@ -15,8 +15,12 @@
     "password",
     "strength",
     "checker",
-    "strengthchecker",
-    "checkpasswordstrength"
+    "check password strength",
+    "password strength checker",
+    "strength checker",
+    "password checker",
+    "password checker strength",
+    "strength password checker"
   ],
   "author": "deanilvincent",
   "license": "MIT",
