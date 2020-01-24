@@ -1,6 +1,6 @@
 {
   "name": "check-password-strength",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Password strength checker based from Javascript RegExp",
   "main": "index.js",
   "scripts": {
