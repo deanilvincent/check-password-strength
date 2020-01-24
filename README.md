@@ -30,16 +30,20 @@ console.log(passwordStrength('A@2asdF2020!!*').value)
 | id | **0** = Weak, **1** = Medium & **2** = Strong |
 | value | Weak, Medium & Strong |
 
+
 ```
 console.log(passwordStrength('Asdfasdf2020'))
 // { id: 1, value: 'Weak' }
 ```
+
 ### RegEx 
 
 **Strong Password RegEx used:** 
+
  `^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})`
 
 **Medium Password RegEx used:**  
+
 `^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})"`
 
 |RegEx| Desc. |
@@ -50,6 +54,7 @@ console.log(passwordStrength('Asdfasdf2020'))
 |(?=.*[0-9]) | The string must contain at least 1 numeric character
 |(?=._[!@#\$%\^&_]) | The string must contain at least one special character, but we are escaping reserved RegEx characters to avoid conflict
 | (?=.{8,}) | The string must be eight characters or longer
+
 
 Credits to Nic Raboy for his awesome [blog!](https://www.thepolyglotdeveloper.com/2015/05/use-regex-to-test-password-strength-in-javascript/)
 
