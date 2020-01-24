@@ -1,29 +1,46 @@
+
 # Overview
+
 A simple way to check that password strength of a certain passphrase. A password strength checker based from [Javascript RegEx](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions).
 
 ## Installation
 
-    npm i check-password-strength
+`npm i check-password-strength --save`
 
 ## Setup & Basic Usage
-
 ```
 const { passwordStrength } = require('check-password-strength')
 
-console.log(passwordStrength(asdfasdf))
+console.log(passwordStrength('asdfasdf').value)
 // Weak (It wiill return weak if the value doesn't match the RegEx conditions)
 
-console.log(passwordStrength(asdfasdf2020))
+console.log(passwordStrength('Asdfasdf2020').value)
 // Medium
 
-console.log(passwordStrength(A@2asdF2020!!*))
+console.log(passwordStrength('A@2asdF2020!!*').value)
 // Strong
+
 ```
+
 ## Additional Info
 
-**Strong Password RegEx used:** `^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})`
+### Object 
+| Property| Desc. |
+| -- | -- |
+| id | **0** = Weak, **1** = Medium & **2** = Strong |
+| value | Weak, Medium & Strong |
 
-**Medium Password RegEx used:** `^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})"`
+```
+console.log(passwordStrength('Asdfasdf2020'))
+// { id: 1, value: 'Weak' }
+```
+### RegEx 
+
+**Strong Password RegEx used:** 
+ `^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})`
+
+**Medium Password RegEx used:**  
+`^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})"`
 
 |RegEx| Desc. |
 |--|--|
@@ -34,11 +51,9 @@ console.log(passwordStrength(A@2asdF2020!!*))
 |(?=._[!@#\$%\^&_]) | The string must contain at least one special character, but we are escaping reserved RegEx characters to avoid conflict
 | (?=.{8,}) | The string must be eight characters or longer
 
-
 Credits to Nic Raboy for his awesome [blog!](https://www.thepolyglotdeveloper.com/2015/05/use-regex-to-test-password-strength-in-javascript/)
 
 Feel free to clone or fork this project: `https://github.com/deanilvincent/check-password-strength.git`
 
 ### License
-
-This project is licensed under the MIT License - see the  [LICENSE.md](https://github.com/deanilvincent/check-password-strength/blob/master/LICENSE.md/) file for details.
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/deanilvincent/check-password-strength/blob/master/LICENSE.md/) file for details.
