@@ -1,7 +1,7 @@
 {
   "name": "check-password-strength",
-  "version": "1.0.3",
-  "description": "Password strength checker based from Javascript RegExp",
+  "version": "1.0.4",
+  "description": "A NPM Password strength checker based from Javascript RegExp. Check passphrase if it's \"Weak\", \"Medium\" or \"Strong\"",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
