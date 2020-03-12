@@ -7,7 +7,7 @@ describe('Index test', () => {
     })
 
     it("Should return strength id 1 if password is medium", () => {
-        assert.equal(app('Asdf1234').id, 1)
+        assert.equal(app('Asdfasdf2020').id, 1)
     })
 
     it("Should return strength id 0 if password is weak", () => {
