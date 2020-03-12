@@ -3,13 +3,15 @@
 
 A simple way to check that password strength of a certain passphrase. A password strength checker based from [Javascript RegEx](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions).
 
+[![Build Status](https://travis-ci.org/deanilvincent/check-password-strength.svg?branch=master)](https://travis-ci.org/deanilvincent/check-password-strength)
+
 ## Installation
 
 `npm i check-password-strength --save`
 
 ## Setup & Basic Usage
 ```
-const { passwordStrength } = require('check-password-strength')
+const passwordStrength = require('check-password-strength')
 
 console.log(passwordStrength('asdfasdf').value)
 // Weak (It wiill return weak if the value doesn't match the RegEx conditions)
@@ -48,7 +50,7 @@ console.log(passwordStrength('Asdfasdf2020'))
 |RegEx| Desc. |
 |--|--|
 | ^ | The password string will start this way |
-| (?=.*[a-z]) | The string must contain at least 1 lowercase alphabetical character |
+| (?=.*[a-z]) | The string must contain at least 1 lowercase alphabetical character | 
 |(?=.*[A-Z]) | The string must contain at least 1 uppercase alphabetical character
 |(?=.*[0-9]) | The string must contain at least 1 numeric character
 |(?=._[!@#\$%\^&_]) | The string must contain at least one special character, but we are escaping reserved RegEx characters to avoid conflict
