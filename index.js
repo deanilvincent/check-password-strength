@@ -1,8 +1,10 @@
-export function passwordStrength(password) {
-  let strength = { // Default
-    id: 0,
-    value: 'Weak'
+module.exports = (password) => {
+  if (!password) {
+    console.error("check-password-strength package - requires a password value.")
+    return undefined
   }
+
+  let strength = {} // Default
 
   const strongRegex = new RegExp(
     "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
@@ -12,14 +14,21 @@ export function passwordStrength(password) {
   );
 
   if (strongRegex.test(password)) {
-    strength.id = 2
-    return strength;
+    strength = {
+      id: 2,
+      value: 'Strong'
+    }
   } else if (mediumRegex.test(password)) {
-    strength.id = 1
-    strength.value = 'Medium'
+    strength = {
+      id: 1,
+      value: 'Medium'
+    }
   } else {
-    strength.id = 0
-    strength.value = 'Weak'
+    strength = {
+      id: 0,
+      value: 'Weak'
+    }
   }
-  return strength;
+
+  return strength
 }
