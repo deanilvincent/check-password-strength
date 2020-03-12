@@ -9,7 +9,7 @@ A simple way to check that password strength of a certain passphrase. A password
 
 ## Setup & Basic Usage
 ```
-const { passwordStrength } = require('check-password-strength')
+const passwordStrength = require('check-password-strength')
 
 console.log(passwordStrength('asdfasdf').value)
 // Weak (It wiill return weak if the value doesn't match the RegEx conditions)
