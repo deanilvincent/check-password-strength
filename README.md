@@ -23,6 +23,20 @@ console.log(passwordStrength('A@2asdF2020!!*').value)
 // Strong
 ```
 
+## Setup & Basic Usage for Typescript
+```
+import check_password_strength from 'check-password-strength'
+
+console.log(check_password_strength("asdfasdf").value);
+// Weak (It wiill return weak if the value doesn't match the RegEx conditions)
+
+console.log(check_password_strength("Asdfasdf2020").value);
+// Medium
+
+console.log(check_password_strength("A@2asdF2020!!*").value);
+// Strong
+```
+
 ## Additional Info
 
 ### Object 
