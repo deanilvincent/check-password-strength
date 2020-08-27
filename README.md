@@ -14,7 +14,7 @@ A simple way to check that password strength of a certain passphrase. A password
 const passwordStrength = require('check-password-strength')
 
 console.log(passwordStrength('asdfasdf').value)
-// Weak (It wiill return weak if the value doesn't match the RegEx conditions)
+// Weak (It will return weak if the value doesn't match the RegEx conditions)
 
 console.log(passwordStrength('Asdfasdf2020').value)
 // Medium
