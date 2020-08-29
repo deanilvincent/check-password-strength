@@ -4,6 +4,7 @@
 A simple way to check that password strength of a certain passphrase. A password strength checker based from [Javascript RegEx](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions).
 
 [![Build Status](https://travis-ci.org/deanilvincent/check-password-strength.svg?branch=master)](https://travis-ci.org/deanilvincent/check-password-strength)
+[![npm](https://img.shields.io/npm/dm/check-password-strength.svg)]()
 
 ## Installation
 
@@ -59,7 +60,13 @@ console.log(passwordStrength('Asdfasdf2020'))
 
 Credits to Nic Raboy for his awesome [blog!](https://www.thepolyglotdeveloper.com/2015/05/use-regex-to-test-password-strength-in-javascript/)
 
-Feel free to clone or fork this project: `https://github.com/deanilvincent/check-password-strength.git`
+### Contribute
+
+Feel free to clone or fork this project:  `https://github.com/deanilvincent/check-password-strength.git`
+
+Contributions & pull requests are welcome!
+
+I'll be glad if you give this project a ★ on [Github](https://github.com/deanilvincent/check-password-strength) :)
 
 ### License
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/deanilvincent/check-password-strength/blob/master/LICENSE.md/) file for details.
