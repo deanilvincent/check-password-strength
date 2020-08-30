@@ -31,11 +31,19 @@ console.log(passwordStrength('A@2asdF2020!!*').value)
 | -- | -- |
 | id | **0** = Weak, **1** = Medium & **2** = Strong |
 | value | Weak, Medium & Strong |
+| contains | lowercase, uppercase, symbol and/or number |
+| length | length of the password |
 
 
 ```
-console.log(passwordStrength('Asdfasdf2020'))
-// { id: 1, "value": "Medium" }
+console.log(passwordStrength('@Sdfasd2020!@#$'))
+// output 
+{ 
+    "id": 1, 
+    "value": "Strong",
+    "contains": [{'message': 'lowercase'},{'message': 'uppercase'},{'message': 'symbol'},{'message': 'number'}],
+    "length": 15
+}
 ```
 
 ### RegEx 

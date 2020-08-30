@@ -4,7 +4,7 @@
   "description": "A NPM Password strength checker based from Javascript RegExp. Check passphrase if it's \"Weak\", \"Medium\" or \"Strong\"",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,13 @@
     "strength checker",
     "password checker",
     "password checker strength",
-    "strength password checker"
+    "strength password checker",
+    "check-password-strength",
+    "password-strength-checker",
+    "strength-checker",
+    "password-checker",
+    "password-checker-strength",
+    "strength-password-checker"
   ],
   "author": "deanilvincent",
   "license": "MIT",
@@ -28,8 +34,7 @@
     "url": "https://github.com/deanilvincent/check-password-strength/issues"
   },
   "homepage": "https://github.com/deanilvincent/check-password-strength#readme",
-  "dependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^7.1.0"
+  "devDependencies": {
+    "jest": "^26.4.2"
   }
 }
