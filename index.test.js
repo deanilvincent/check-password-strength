@@ -8,6 +8,18 @@ it("Should return strength id 1 if password is medium", () => {
   expect(app("Asdfasdf2020").id).toBe(1);
 });
 
+it("Should return strength id 1 if password has two combination of symbol + lowercase", () => {
+  expect(app("asdf!@#$").id).toBe(1);
+});
+
+it("Should return strength id 1 if password has two combination of symbol + uppercase", () => {
+  expect(app("ASDF!@#$").id).toBe(1);
+});
+
+it("Should return strength id 1 if password has two combination of symbol + numeric", () => {
+  expect(app("1234!@#$").id).toBe(1);
+});
+
 it("Should return strength id 0 if password is weak", () => {
   expect(app("a").id).toBe(0);
 });
@@ -18,6 +30,19 @@ it("Should return strength value 'Strong' if password is strong", () => {
 
 it("Should return strength value 'Medium' if password is medium", () => {
   expect(app("Asdf1234").value).toBe("Medium");
+});
+
+// pass combination
+it("Should return strength value 'Medium' if password has two combination of symbol + lowercase", () => {
+  expect(app("asdf!@#$").value).toBe("Medium");
+});
+
+it("Should return strength value 'Medium' if password has two combination of symbol + uppercase", () => {
+  expect(app("ASDF!@#$").value).toBe("Medium");
+});
+
+it("Should return strength value 'Medium' if password has two combination of symbol + numeric", () => {
+  expect(app("1234!@#$").value).toBe("Medium");
 });
 
 it("Should return strength value 'Weak' if password is weak", () => {

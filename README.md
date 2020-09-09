@@ -56,7 +56,7 @@ console.log(passwordStrength('@Sdfasd2020!@#$'))
 
 **Medium Password RegEx used:**  
 
-`^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})"`
+`^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[!@#\$%\^&\*])|((?=.*[a-z])(?=.*[!@#\$%\^&\*])|((?=.*[0-9])(?=.*[!@#\$%\^&\*]))(?=.{6,})"`
 
 |RegEx| Desc. |
 |--|--|
@@ -65,10 +65,16 @@ console.log(passwordStrength('@Sdfasd2020!@#$'))
 |(?=.*[A-Z]) | The string must contain at least 1 uppercase alphabetical character
 |(?=.*[0-9]) | The string must contain at least 1 numeric character
 |(?=._[!@#\$%\^&_]) | The string must contain at least one special character, but we are escaping reserved RegEx characters to avoid conflict
-| (?=.{8,}) | The string must be eight characters or longer
+| (?=.{8,}) | The string must be eight characters or longer for strong strength
+| (?=.{6,}) | Mininum of 6 characters for medium strength
 
+## Other resources
 
-Credits to Nic Raboy for his awesome [blog!](https://www.thepolyglotdeveloper.com/2015/05/use-regex-to-test-password-strength-in-javascript/)
+If you're working with .net core project, I've created a simple nuget package with same RegEx strings to validate a password strength.
+
+You can easily install via Nuget Package Manager or .NET CLI ([Check.Password.Strength](https://github.com/deanilvincent/Check.Password.Strength)). This package uses Regular Expression `new Regex()` derives from `System.Text.RegularExpressions`. You can use this especially if you want to validate the passcode strength on backend services or web apis of your project.
+
+Reference [blog](https://www.thepolyglotdeveloper.com/2015/05/use-regex-to-test-password-strength-in-javascript/).
 
 ### Contribute
 
