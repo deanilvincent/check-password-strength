@@ -1,6 +1,6 @@
 {
   "name": "check-password-strength",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "A NPM Password strength checker based from Javascript RegExp. Check passphrase if it's \"Weak\", \"Medium\" or \"Strong\"",
   "main": "index.js",
   "scripts": {
