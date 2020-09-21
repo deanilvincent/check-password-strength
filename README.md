@@ -56,7 +56,7 @@ console.log(passwordStrength('@Sdfasd2020!@#$'))
 
 **Medium Password RegEx used:**  
 
-`^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[!@#\$%\^&\*])|((?=.*[a-z])(?=.*[!@#\$%\^&\*])|((?=.*[0-9])(?=.*[!@#\$%\^&\*]))(?=.{6,})"`
+`^((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[!@#\$%\^&\*])|((?=.*[a-z])(?=.*[!@#\$%\^&\*])|((?=.*[0-9])(?=.*[!@#\$%\^&\*]))(?=.{6,})"`
 
 |RegEx| Desc. |
 |--|--|
@@ -70,8 +70,7 @@ console.log(passwordStrength('@Sdfasd2020!@#$'))
 
 ## Other resources
 
-Other resources#### For .NET Project
-If you're working with .net core project, I've created a simple nuget package with same RegEx strings to validate a password strength.
+For .NET Project If you're working with .net core project, I've created a simple nuget package with same RegEx strings to validate a password strength.
 
 You can easily install via Nuget Package Manager or .NET CLI ([Check.Password.Strength](https://github.com/deanilvincent/Check.Password.Strength)). This package uses Regular Expression `new Regex()` derives from `System.Text.RegularExpressions`. You can use this especially if you want to validate the passcode strength on backend services or web apis of your project.
 
