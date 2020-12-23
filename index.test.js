@@ -99,8 +99,8 @@ it("Should return contains of all criteria (lowercase, uppercase, symbol & numbe
   expect(app("asdfASDF!@#$1234").contains).toStrictEqual([
     { message: "lowercase" },
     { message: "uppercase" },
-    { message: "symbol" },
     { message: "number" },
+    { message: "symbol" },
   ]);
 });
 
@@ -127,4 +127,100 @@ it("Should return type of number if request is for length value", () => {
 // exception
 it("Should throw an exception if password parameter is empty", () => {
   expect(() => app(null)).toThrow("Password is empty.");
+});
+
+overridenOptions = [
+  {
+    id: 0,
+    value: "Weak",
+    minDiversity: 0,
+    minLength: 0
+  },
+  {
+    id: 1,
+    value: "Medium",
+    minDiversity: 2,
+    minLength: 6
+  },
+  {
+    id: 2,
+    value: "Strong",
+    minDiversity: 3,
+    minLength: 8
+  },
+  {
+    id: 3,
+    value: "Very strong",
+    minDiversity: 4,
+    minLength: 10
+  }
+]
+
+it("[overridden options] Should return strength id 0 if password is weak", () => {
+  expect(app("aB1$", overridenOptions).id).toBe(0);
+  expect(app("aB1$", overridenOptions).value).toBe("Weak");
+});
+
+it("[overridden options] Should return strength id 1 if password is medium", () => {
+  expect(app("abcde123456", overridenOptions).id).toBe(1);
+  expect(app("abcde123456", overridenOptions).value).toBe("Medium");
+});
+
+it("[overridden options] Should return strength id 2 if password is strong", () => {
+  expect(app("abcde123456$", overridenOptions).id).toBe(2);
+  expect(app("abcde123456$", overridenOptions).value).toBe("Strong");
+});
+
+it("[overridden options] Should return strength id 3 if password is very strong", () => {
+  expect(app("abcde123456$B", overridenOptions).id).toBe(3);
+  expect(app("abcde123456$B", overridenOptions).value).toBe("Very strong");
+});
+
+it("[overridden options] Should return true if request for contains is an array", () => {
+  const arrayData = Array.isArray(app("a", overridenOptions).contains);
+  expect(arrayData).toEqual(true);
+});
+
+it("[overridden options] Should return contains of 'lowercase' if the password has lowercase", () => {
+  const contains = app("lower", overridenOptions).contains;
+  const contain = contains.find((x) => x.message === "lowercase");
+  const condition = contain.message === "lowercase";
+  expect(condition).toEqual(true);
+});
+
+it("[overridden options] Should return contains of 'uppercase' if the password has uppercase", () => {
+  const contains = app("Uppercase", overridenOptions).contains;
+  const contain = contains.find((x) => x.message === "uppercase");
+  const condition = contain.message === "uppercase";
+  expect(condition).toEqual(true);
+});
+
+it("[overridden options] Should return contains of 'symbol' if the password has symbol", () => {
+  const contains = app("!test", overridenOptions).contains;
+  const contain = contains.find((x) => x.message === "symbol");
+  const condition = contain.message === "symbol";
+  expect(condition).toEqual(true);
+});
+
+it("[overridden options] Should return contains of 'number' if the password has number", () => {
+  const contains = app("1234", overridenOptions).contains;
+  const contain = contains.find((x) => x.message === "number");
+  const condition = contain.message === "number";
+  expect(condition).toEqual(true);
+});
+
+it("[overridden allowedSymbols] Should not contains symbols if the password does not have one", () => {
+  const contains = app("abcd@", undefined, '$').contains;
+  expect(contains.map(c => c.message)).toEqual(expect.arrayContaining(['lowercase']));
+  expect(contains.map(c => c.message)).toEqual(expect.not.arrayContaining(['uppercase']));
+  expect(contains.map(c => c.message)).toEqual(expect.not.arrayContaining(['number']));
+  expect(contains.map(c => c.message)).toEqual(expect.not.arrayContaining(['symbol']));
+});
+
+it("[overridden allowedSymbols] Should contains symbols if the password have one", () => {
+  const contains = app("abcd@Ê", undefined, 'Ê').contains;
+  expect(contains.map(c => c.message)).toEqual(expect.arrayContaining(['lowercase']));
+  expect(contains.map(c => c.message)).toEqual(expect.not.arrayContaining(['uppercase']));
+  expect(contains.map(c => c.message)).toEqual(expect.not.arrayContaining(['number']));
+  expect(contains.map(c => c.message)).toEqual(expect.arrayContaining(['symbol']));
 });
