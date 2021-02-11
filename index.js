@@ -1,83 +1,67 @@
-module.exports = (password) => {
+defaultOptions = [
+  {
+    id: 0,
+    value: "Weak",
+    minDiversity: 0,
+    minLength: 0
+  },
+  {
+    id: 1,
+    value: "Medium",
+    minDiversity: 2,
+    minLength: 6
+  },
+  {
+    id: 2,
+    value: "Strong",
+    minDiversity: 4,
+    minLength: 8
+  }
+]
+
+module.exports = (password, options = defaultOptions, allowedSymbols="!@#$%^&*") => {
   if (!password) {
     throw new Error("Password is empty.");
   }
 
-  const lowerCaseRegex = "(?=.*[a-z])";
-  const upperCaseRegex = "(?=.*[A-Z])";
-  const symbolsRegex = "(?=.*[!@#$%^&*])";
-  const numericRegex = "(?=.*[0-9])";
+  const rules = [
+    {
+      regex: "[a-z]",
+      message: 'lowercase'
+    },
+    {
+      regex: '[A-Z]',
+      message: 'uppercase'
+    },
+    {
+      regex: '[0-9]',
+      message: 'number'
+    },
+  ]
 
-  let strength = {
-    id: null,
-    value: null,
-    length: null,
-    contains: [],
-  }; 
-  
-  // Default
-  let passwordContains = [];
-
-  if (new RegExp(`^${lowerCaseRegex}`).test(password)) {
-    passwordContains = [
-      ...passwordContains,
-      {
-        message: "lowercase",
-      },
-    ];
+  let passwordValidationRegex
+  if (allowedSymbols) {
+    rules.push({
+      regex: `[${allowedSymbols}]`,
+      message: 'symbol'
+    })
   }
 
-  if (new RegExp(`^${upperCaseRegex}`).test(password)) {
-    passwordContains = [
-      ...passwordContains,
-      {
-        message: "uppercase",
-      },
-    ];
-  }
+  let strength = {}
 
-  if (new RegExp(`^${symbolsRegex}`).test(password)) {
-    passwordContains = [
-      ...passwordContains,
-      {
-        message: "symbol",
-      },
-    ];
-  }
+  strength.contains = rules
+    .filter(rule => new RegExp(`${rule.regex}`).test(password))
+    .map(rule => ({message: rule.message}))
 
-  if (new RegExp(`^${numericRegex}`).test(password)) {
-    passwordContains = [
-      ...passwordContains,
-      {
-        message: "number",
-      },
-    ];
-  }
-
-  const strongRegex = new RegExp(
-    `^${lowerCaseRegex}${upperCaseRegex}${numericRegex}${symbolsRegex}(?=.{8,})`
-  );
-  const mediumRegex = new RegExp(
-    `^((${lowerCaseRegex}${upperCaseRegex})|(${lowerCaseRegex}${numericRegex})|(${upperCaseRegex}${numericRegex}))(?=.{6,})`
-  );
-
-  if (strongRegex.test(password)) {
-    strength = {
-      id: 2,
-      value: "Strong",
-    };
-  } else if (mediumRegex.test(password)) {
-    strength = {
-      id: 1,
-      value: "Medium",
-    };
-  } else {
-    strength = {
-      id: 0,
-      value: "Weak",
-    };
-  }
   strength.length = password.length;
-  strength.contains = passwordContains;
+
+  let fulfilledOptions = options
+    .filter(option => strength.contains.length >= option.minDiversity)
+    .filter(option => strength.length >= option.minLength)
+    .sort((o1, o2) => o2.id - o1.id)
+    .map(option => ({id: option.id, value: option.value}))
+
+  Object.assign(strength, fulfilledOptions[0])
+
   return strength;
 };
