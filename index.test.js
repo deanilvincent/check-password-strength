@@ -1,11 +1,15 @@
 const app = require("./index");
 
+it("Should return strength id 3 if password is very strong", () => {
+  expect(app("A@2asdF2020!!*!").id).toBe(3);
+});
+
 it("Should return strength id 2 if password is strong", () => {
-  expect(app("Asdf12343!").id).toBe(2);
+  expect(app("Asd1234!").id).toBe(2);
 });
 
 it("Should return strength id 1 if password is medium", () => {
-  expect(app("Asdfasdf2020").id).toBe(1);
+  expect(app("asdf1234").id).toBe(1);
 });
 
 it("Should return strength id 1 if password has two combination of symbol + lowercase", () => {
@@ -24,8 +28,12 @@ it("Should return strength id 0 if password is weak", () => {
   expect(app("a").id).toBe(0);
 });
 
+it("Should return strength value 'Very strong' if password is strong", () => {
+  expect(app("A@2asdF2020!!*").value).toBe("Very strong");
+});
+
 it("Should return strength value 'Strong' if password is strong", () => {
-  expect(app("Asdf12343!").value).toBe("Strong");
+  expect(app("Asd1234!").value).toBe("Strong");
 });
 
 it("Should return strength value 'Medium' if password is medium", () => {

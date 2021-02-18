@@ -16,6 +16,12 @@ defaultOptions = [
     value: "Strong",
     minDiversity: 4,
     minLength: 8
+  },
+  {
+    id: 3,
+    value: "Very strong",
+    minDiversity: 4,
+    minLength: 10
   }
 ]
 
@@ -39,7 +45,6 @@ module.exports = (password, options = defaultOptions, allowedSymbols="!@#$%^&*")
     },
   ]
 
-  let passwordValidationRegex
   if (allowedSymbols) {
     rules.push({
       regex: `[${allowedSymbols}]`,

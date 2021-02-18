@@ -6,6 +6,8 @@ A simple way to check that password strength of a certain passphrase. A password
 [![Build Status](https://travis-ci.org/deanilvincent/check-password-strength.svg?branch=master)](https://travis-ci.org/deanilvincent/check-password-strength)
 [![npm](https://img.shields.io/npm/dm/check-password-strength.svg)](https://img.shields.io/npm/dm/check-password-strength.svg)
 
+[![Downloads](https://img.shields.io/npm/dt/check-password-strength.svg)](https://img.shields.io/npm/dt/check-password-strength.svg)
+
 [DEMO here](https://check-password-strength.netlify.app/) 
 
 ## Installation
@@ -19,36 +21,85 @@ const passwordStrength = require('check-password-strength')
 console.log(passwordStrength('asdfasdf').value)
 // Weak (It will return weak if the value doesn't match the RegEx conditions)
 
-console.log(passwordStrength('Asdfasdf2020').value)
+console.log(passwordStrength('asdf1234').value)
 // Medium
 
-console.log(passwordStrength('A@2asdF2020!!*').value)
+console.log(passwordStrength('Asd1234!').value)
 // Strong
+
+console.log(passwordStrength('A@2asdF2020!!*').value)
+// Very strong
 ```
 
 ## Additional Info
 
-### Object 
+### Object Result
 | Property| Desc. |
 | -- | -- |
-| id | **0** = Weak, **1** = Medium & **2** = Strong |
-| value | Weak, Medium & Strong |
+| id | **0** = Weak, **1** = Medium & **2** = Strong, **3** = Very strong |
+| value | Weak, Medium, Strong & Very strong |
 | contains | lowercase, uppercase, symbol and/or number |
 | length | length of the password |
 
+### Password Length Default Options
+| Name | Mininum Diversity | Mininum Length |
+| -- | -- | -- |
+| Weak | 0 | 0 |
+| Medium | 2 | 6 |
+| Strong | 4 | 8 |
+| Very strong | 4 | 10 |
 
 ```
 console.log(passwordStrength('@Sdfasd2020!@#$'))
 // output 
 { 
     "id": 1, 
-    "value": "Strong",
+    "value": "Very Strong",
     "contains": [{'message': 'lowercase'},{'message': 'uppercase'},{'message': 'symbol'},{'message': 'number'}],
     "length": 15
 }
 ```
 
+## Default Options (Can be overridden)
+```
+[
+  {
+    id: 0,
+    value: "Weak",
+    minDiversity: 0,
+    minLength: 0
+  },
+  {
+    id: 1,
+    value: "Medium",
+    minDiversity: 2,
+    minLength: 6
+  },
+  {
+    id: 2,
+    value: "Strong",
+    minDiversity: 4,
+    minLength: 8
+  },
+  {
+    id: 3,
+    value: "Very strong",
+    minDiversity: 4,
+    minLength: 10
+  }
+]
+```
+
+To override the default options, just simply pass your custom array in the next argument. 
+```
+passwordStrength('myPassword', yourCustomOptions)
+```
+
 ### RegEx 
+
+**Very Strong**
+
+ `^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{10,})`
 
 **Strong Password RegEx used:** 
 
@@ -62,11 +113,12 @@ console.log(passwordStrength('@Sdfasd2020!@#$'))
 |--|--|
 | ^ | The password string will start this way |
 | (?=.*[a-z]) | The string must contain at least 1 lowercase alphabetical character | 
-|(?=.*[A-Z]) | The string must contain at least 1 uppercase alphabetical character
-|(?=.*[0-9]) | The string must contain at least 1 numeric character
-|(?=._[!@#\$%\^&_]) | The string must contain at least one special character, but we are escaping reserved RegEx characters to avoid conflict
-| (?=.{8,}) | The string must be eight characters or longer for strong strength
-| (?=.{6,}) | Mininum of 6 characters for medium strength
+|(?=.*[A-Z]) | The string must contain at least 1 uppercase alphabetical character |
+|(?=.*[0-9]) | The string must contain at least 1 numeric character |
+|(?=._[!@#\$%\^&_]) | The string must contain at least one special character, but we are escaping reserved RegEx characters to avoid conflict |
+| (?=.{10,}) | The string must be eight characters or longer for very strong strength |
+| (?=.{8,}) | The string must be eight characters or longer for strong strength |
+| (?=.{6,}) | Mininum of 6 characters for medium strength |
 
 ## Other resources
 
