@@ -1,14 +1,14 @@
 const app = require("./index");
 
-it("Should return strength id 3 if password is very strong", () => {
+it("Should return strength id 3 if password is Strong", () => {
   expect(app("A@2asdF2020!!*!").id).toBe(3);
 });
 
-it("Should return strength id 2 if password is strong", () => {
+it("Should return strength id 2 if password is Medium", () => {
   expect(app("Asd1234!").id).toBe(2);
 });
 
-it("Should return strength id 1 if password is medium", () => {
+it("Should return strength id 1 if password is Weak", () => {
   expect(app("asdf1234").id).toBe(1);
 });
 
@@ -28,33 +28,33 @@ it("Should return strength id 0 if password is weak", () => {
   expect(app("a").id).toBe(0);
 });
 
-it("Should return strength value 'Very strong' if password is strong", () => {
-  expect(app("A@2asdF2020!!*").value).toBe("Very strong");
+it("Should return strength value 'Strong' if password is Medium", () => {
+  expect(app("A@2asdF2020!!*").value).toBe("Strong");
 });
 
-it("Should return strength value 'Strong' if password is strong", () => {
-  expect(app("Asd1234!").value).toBe("Strong");
+it("Should return strength value 'Medium' if password is Medium", () => {
+  expect(app("Asd1234!").value).toBe("Medium");
 });
 
-it("Should return strength value 'Medium' if password is medium", () => {
-  expect(app("Asdf1234").value).toBe("Medium");
+it("Should return strength value 'Weak' if password is Weak", () => {
+  expect(app("Asdf1234").value).toBe("Weak");
 });
 
 // pass combination
-it("Should return strength value 'Medium' if password has two combination of symbol + lowercase", () => {
-  expect(app("asdf!@#$").value).toBe("Medium");
+it("Should return strength value 'Weak' if password has two combination of symbol + lowercase", () => {
+  expect(app("asdf!@#$").value).toBe("Weak");
 });
 
-it("Should return strength value 'Medium' if password has two combination of symbol + uppercase", () => {
-  expect(app("ASDF!@#$").value).toBe("Medium");
+it("Should return strength value 'Weak' if password has two combination of symbol + uppercase", () => {
+  expect(app("ASDF!@#$").value).toBe("Weak");
 });
 
-it("Should return strength value 'Medium' if password has two combination of symbol + numeric", () => {
-  expect(app("1234!@#$").value).toBe("Medium");
+it("Should return strength value 'Weak' if password has two combination of symbol + numeric", () => {
+  expect(app("1234!@#$").value).toBe("Weak");
 });
 
-it("Should return strength value 'Weak' if password is weak", () => {
-  expect(app("a").value).toBe("Weak");
+it("Should return strength value 'Too weak' if password is weak", () => {
+  expect(app("a").value).toBe("Too weak");
 });
 
 it("Should return type of number if request for id", () => {
@@ -140,25 +140,25 @@ it("Should throw an exception if password parameter is empty", () => {
 overridenOptions = [
   {
     id: 0,
-    value: "Weak",
+    value: "Too weak",
     minDiversity: 0,
     minLength: 0
   },
   {
     id: 1,
-    value: "Medium",
+    value: "Weak",
     minDiversity: 2,
     minLength: 6
   },
   {
     id: 2,
-    value: "Strong",
+    value: "Medium",
     minDiversity: 3,
     minLength: 8
   },
   {
     id: 3,
-    value: "Very strong",
+    value: "Strong",
     minDiversity: 4,
     minLength: 10
   }
@@ -166,22 +166,22 @@ overridenOptions = [
 
 it("[overridden options] Should return strength id 0 if password is weak", () => {
   expect(app("aB1$", overridenOptions).id).toBe(0);
-  expect(app("aB1$", overridenOptions).value).toBe("Weak");
+  expect(app("aB1$", overridenOptions).value).toBe("Too weak");
 });
 
-it("[overridden options] Should return strength id 1 if password is medium", () => {
+it("[overridden options] Should return strength id 1 if password is Weak", () => {
   expect(app("abcde123456", overridenOptions).id).toBe(1);
-  expect(app("abcde123456", overridenOptions).value).toBe("Medium");
+  expect(app("abcde123456", overridenOptions).value).toBe("Weak");
 });
 
-it("[overridden options] Should return strength id 2 if password is strong", () => {
+it("[overridden options] Should return strength id 2 if password is Medium", () => {
   expect(app("abcde123456$", overridenOptions).id).toBe(2);
-  expect(app("abcde123456$", overridenOptions).value).toBe("Strong");
+  expect(app("abcde123456$", overridenOptions).value).toBe("Medium");
 });
 
-it("[overridden options] Should return strength id 3 if password is very strong", () => {
+it("[overridden options] Should return strength id 3 if password is Strong", () => {
   expect(app("abcde123456$B", overridenOptions).id).toBe(3);
-  expect(app("abcde123456$B", overridenOptions).value).toBe("Very strong");
+  expect(app("abcde123456$B", overridenOptions).value).toBe("Strong");
 });
 
 it("[overridden options] Should return true if request for contains is an array", () => {

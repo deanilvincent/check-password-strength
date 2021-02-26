@@ -1,25 +1,25 @@
 defaultOptions = [
   {
     id: 0,
-    value: "Weak",
+    value: "Too weak",
     minDiversity: 0,
     minLength: 0
   },
   {
     id: 1,
-    value: "Medium",
+    value: "Weak",
     minDiversity: 2,
     minLength: 6
   },
   {
     id: 2,
-    value: "Strong",
+    value: "Medium",
     minDiversity: 4,
     minLength: 8
   },
   {
     id: 3,
-    value: "Very strong",
+    value: "Strong",
     minDiversity: 4,
     minLength: 10
   }

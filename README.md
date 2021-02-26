@@ -19,16 +19,16 @@ A simple way to check that password strength of a certain passphrase. A password
 const passwordStrength = require('check-password-strength')
 
 console.log(passwordStrength('asdfasdf').value)
-// Weak (It will return weak if the value doesn't match the RegEx conditions)
+// Too weak (It will return Too weak if the value doesn't match the RegEx conditions)
 
 console.log(passwordStrength('asdf1234').value)
-// Medium
+// Weak
 
 console.log(passwordStrength('Asd1234!').value)
-// Strong
+// Medium
 
 console.log(passwordStrength('A@2asdF2020!!*').value)
-// Very strong
+// Strong
 ```
 
 ## Additional Info
@@ -36,54 +36,54 @@ console.log(passwordStrength('A@2asdF2020!!*').value)
 ### Object Result
 | Property| Desc. |
 | -- | -- |
-| id | **0** = Weak, **1** = Medium & **2** = Strong, **3** = Very strong |
-| value | Weak, Medium, Strong & Very strong |
+| id | **0** = Too weak, **1** = Weak & **2** = Medium, **3** = Strong |
+| value | Too weak, Weak, Medium & Strong |
 | contains | lowercase, uppercase, symbol and/or number |
 | length | length of the password |
 
 ### Password Length Default Options
 | Name | Mininum Diversity | Mininum Length |
 | -- | -- | -- |
-| Weak | 0 | 0 |
-| Medium | 2 | 6 |
-| Strong | 4 | 8 |
-| Very strong | 4 | 10 |
+| Too weak | 0 | 0 |
+| Weak | 2 | 6 |
+| Medium | 4 | 8 |
+| Strong | 4 | 10 |
 
 ```
 console.log(passwordStrength('@Sdfasd2020!@#$'))
 // output 
 { 
     "id": 1, 
-    "value": "Very Strong",
+    "value": "Strong",
     "contains": [{'message': 'lowercase'},{'message': 'uppercase'},{'message': 'symbol'},{'message': 'number'}],
     "length": 15
 }
 ```
 
-## Default Options (Can be overridden)
+### Default Options (Can be overridden)
 ```
 [
   {
     id: 0,
-    value: "Weak",
+    value: "Too weak",
     minDiversity: 0,
     minLength: 0
   },
   {
     id: 1,
-    value: "Medium",
+    value: "Weak",
     minDiversity: 2,
     minLength: 6
   },
   {
     id: 2,
-    value: "Strong",
+    value: "Medium",
     minDiversity: 4,
     minLength: 8
   },
   {
     id: 3,
-    value: "Very strong",
+    value: "Strong",
     minDiversity: 4,
     minLength: 10
   }
@@ -97,15 +97,15 @@ passwordStrength('myPassword', yourCustomOptions)
 
 ### RegEx 
 
-**Very Strong**
+**Strong**
 
  `^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{10,})`
 
-**Strong Password RegEx used:** 
+**Medium Password RegEx used:** 
 
  `^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})`
 
-**Medium Password RegEx used:**  
+**Weak Password RegEx used:**  
 
 `^((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[!@#\$%\^&\*])|((?=.*[a-z])(?=.*[!@#\$%\^&\*])|((?=.*[0-9])(?=.*[!@#\$%\^&\*]))(?=.{6,})"`
 
@@ -116,9 +116,9 @@ passwordStrength('myPassword', yourCustomOptions)
 |(?=.*[A-Z]) | The string must contain at least 1 uppercase alphabetical character |
 |(?=.*[0-9]) | The string must contain at least 1 numeric character |
 |(?=._[!@#\$%\^&_]) | The string must contain at least one special character, but we are escaping reserved RegEx characters to avoid conflict |
-| (?=.{10,}) | The string must be eight characters or longer for very strong strength |
-| (?=.{8,}) | The string must be eight characters or longer for strong strength |
-| (?=.{6,}) | Mininum of 6 characters for medium strength |
+| (?=.{10,}) | The string must be eight characters or longer for Strong strength |
+| (?=.{8,}) | The string must be eight characters or longer for Medium strength |
+| (?=.{6,}) | Mininum of 6 characters for Weak strength |
 
 ## Other resources
 
