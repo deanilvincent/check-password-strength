@@ -55,7 +55,7 @@ console.log(passwordStrength('@Sdfasd2020!@#$'))
 { 
     "id": 1, 
     "value": "Strong",
-    "contains": [{'message': 'lowercase'},{'message': 'uppercase'},{'message': 'symbol'},{'message': 'number'}],
+    "contains": ['lowercase', 'uppercase', 'symbol', 'number'],
     "length": 15
 }
 ```

@@ -56,7 +56,7 @@ module.exports = (password, options = defaultOptions, allowedSymbols="!@#$%^&*")
 
   strength.contains = rules
     .filter(rule => new RegExp(`${rule.regex}`).test(password))
-    .map(rule => ({message: rule.message}))
+    .map(rule => rule.message)
 
   strength.length = password.length;
 
