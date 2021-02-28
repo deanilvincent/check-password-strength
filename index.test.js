@@ -1,5 +1,11 @@
 const app = require("./index");
 
+it("Should not modify the password parameter", () => {
+  let pwd = "Hello!"
+  app(pwd)
+  expect(pwd).toBe("Hello!")
+})
+
 it("Should return strength id 3 if password is Strong", () => {
   expect(app("A@2asdF2020!!*!").id).toBe(3);
 });
@@ -132,9 +138,10 @@ it("Should return type of number if request is for length value", () => {
   expect(typeof app("1234").length).toBe("number");
 });
 
-// exception
-it("Should throw an exception if password parameter is empty", () => {
-  expect(() => app(null)).toThrow("Password is empty.");
+it("Should return an empty password result if password parameter is null", () => {
+  expect(app(null).id).toBe(0);
+  expect(app(null).length).toBe(0);
+  expect(app(null).contains).toStrictEqual([]);
 });
 
 overridenOptions = [

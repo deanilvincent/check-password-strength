@@ -90,7 +90,14 @@ console.log(passwordStrength('@Sdfasd2020!@#$'))
 ]
 ```
 
-To override the default options, just simply pass your custom array in the next argument. 
+To override the default options, simply pass your custom array as the second argument:
+
+  - id: correspond to the return id attribute.
+  - value: correspond to the return value attribute.
+  - minDiversity: between 0 and 4, correspond to the minimum of different criterias ('lowercase', 'uppercase', 'symbol', 'number') that should be met to pass the password strength
+  - minLength: minimum length of the password that should be met to pass the password strength
+
+The minDiversity and minLength parameters of the first element cannot be overriden (set to 0 at the beginning of the method). Therefore, the first element should always correspond to a "too weak" option.
 ```
 passwordStrength('myPassword', yourCustomOptions)
 ```
