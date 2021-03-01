@@ -1,4 +1,4 @@
-const app = require("./index");
+const {passwordStrength: app, defaultOptions} = require("./index");
 
 it("Should not modify the password parameter", () => {
   let pwd = "Hello!"
@@ -222,6 +222,13 @@ it("[overridden options] Should return contains of 'number' if the password has 
   const contain = contains.find((x) => x === "number");
   const condition = contain === "number";
   expect(condition).toEqual(true);
+});
+
+it("[overridden options] Should return the same object with the default option", () => {
+  expect(app("abcd@")).toStrictEqual(app('abdc@', defaultOptions))
+  expect(app("abcd@E")).toStrictEqual(app('abdc@E', defaultOptions))
+  expect(app("abcd@3")).toStrictEqual(app('abdc@3', defaultOptions))
+  expect(app(null)).toStrictEqual(app(null, defaultOptions))
 });
 
 it("[overridden allowedSymbols] Should not contains symbols if the password does not have one", () => {

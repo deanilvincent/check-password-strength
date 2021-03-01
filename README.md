@@ -14,6 +14,18 @@ A simple way to check that password strength of a certain passphrase. A password
 
 `npm i check-password-strength --save`
 
+## Migration from 1.x.x to 2.0.O
+
+```
+// 1.x.x
+const whateEverYourFunctionNameWasBefore = require("./index");
+```
+
+```
+// 2.0.0
+const { passwordStrength : whateEverYourFunctionNameWasBefore } = require("./index");
+```
+
 ## Setup & Basic Usage
 ```
 const passwordStrength = require('check-password-strength')
@@ -60,7 +72,14 @@ console.log(passwordStrength('@Sdfasd2020!@#$'))
 }
 ```
 
-### Default Options (Can be overridden)
+### Default Options
+
+the default options can be required:
+```
+const { defaultOptions } = require("./index");
+```
+
+default options:
 ```
 [
   {
@@ -98,6 +117,7 @@ To override the default options, simply pass your custom array as the second arg
   - minLength: minimum length of the password that should be met to pass the password strength
 
 The minDiversity and minLength parameters of the first element cannot be overriden (set to 0 at the beginning of the method). Therefore, the first element should always correspond to a "too weak" option.
+
 ```
 passwordStrength('myPassword', yourCustomOptions)
 ```

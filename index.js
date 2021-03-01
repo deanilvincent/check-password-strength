@@ -25,7 +25,7 @@ defaultOptions = [
   }
 ]
 
-module.exports = (password, options = defaultOptions, allowedSymbols="!@#$%^&*") => {
+passwordStrength = (password, options = defaultOptions, allowedSymbols="!@#$%^&*") => {
   
   let passwordCopy = password || ''
 
@@ -72,3 +72,5 @@ module.exports = (password, options = defaultOptions, allowedSymbols="!@#$%^&*")
 
   return strength;
 };
+
+module.exports = { passwordStrength, defaultOptions }
