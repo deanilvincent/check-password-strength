@@ -19,11 +19,17 @@ A simple way to check that password strength of a certain passphrase. A password
 ```
 // 1.x.x
 const whateEverYourFunctionNameWasBefore = require("./index");
+
+// 'contains' attribute of the response object format was
+response.contains = [{'message': 'lowercase'}, ...]
 ```
 
 ```
 // 2.0.0
 const { passwordStrength : whateEverYourFunctionNameWasBefore } = require("./index");
+
+// 'contains' attribute of the response object format is now
+response.contains = ['lowercase', ...]
 ```
 
 ## Setup & Basic Usage
