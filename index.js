@@ -25,10 +25,12 @@ defaultOptions = [
   }
 ]
 
-module.exports = (password, options = defaultOptions, allowedSymbols="!@#$%^&*") => {
-  if (!password) {
-    throw new Error("Password is empty.");
-  }
+passwordStrength = (password, options = defaultOptions, allowedSymbols="!@#$%^&*") => {
+  
+  let passwordCopy = password || ''
+
+  options[0].minDiversity = 0,
+  options[0].minLength = 0
 
   const rules = [
     {
@@ -55,10 +57,10 @@ module.exports = (password, options = defaultOptions, allowedSymbols="!@#$%^&*")
   let strength = {}
 
   strength.contains = rules
-    .filter(rule => new RegExp(`${rule.regex}`).test(password))
-    .map(rule => ({message: rule.message}))
+    .filter(rule => new RegExp(`${rule.regex}`).test(passwordCopy))
+    .map(rule => rule.message)
 
-  strength.length = password.length;
+  strength.length = passwordCopy.length;
 
   let fulfilledOptions = options
     .filter(option => strength.contains.length >= option.minDiversity)
@@ -70,3 +72,5 @@ module.exports = (password, options = defaultOptions, allowedSymbols="!@#$%^&*")
 
   return strength;
 };
+
+module.exports = { passwordStrength, defaultOptions }

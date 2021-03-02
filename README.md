@@ -14,6 +14,24 @@ A simple way to check that password strength of a certain passphrase. A password
 
 `npm i check-password-strength --save`
 
+## Migration from 1.x.x to 2.0.O
+
+```
+// 1.x.x
+const whateEverYourFunctionNameWasBefore = require("./index");
+
+// 'contains' attribute of the response object format was
+response.contains = [{'message': 'lowercase'}, ...]
+```
+
+```
+// 2.0.0
+const { passwordStrength : whateEverYourFunctionNameWasBefore } = require("./index");
+
+// 'contains' attribute of the response object format is now
+response.contains = ['lowercase', ...]
+```
+
 ## Setup & Basic Usage
 ```
 const passwordStrength = require('check-password-strength')
@@ -55,12 +73,19 @@ console.log(passwordStrength('@Sdfasd2020!@#$'))
 { 
     "id": 1, 
     "value": "Strong",
-    "contains": [{'message': 'lowercase'},{'message': 'uppercase'},{'message': 'symbol'},{'message': 'number'}],
+    "contains": ['lowercase', 'uppercase', 'symbol', 'number'],
     "length": 15
 }
 ```
 
-### Default Options (Can be overridden)
+### Default Options
+
+the default options can be required:
+```
+const { defaultOptions } = require("./index");
+```
+
+default options:
 ```
 [
   {
@@ -90,7 +115,15 @@ console.log(passwordStrength('@Sdfasd2020!@#$'))
 ]
 ```
 
-To override the default options, just simply pass your custom array in the next argument. 
+To override the default options, simply pass your custom array as the second argument:
+
+  - id: correspond to the return id attribute.
+  - value: correspond to the return value attribute.
+  - minDiversity: between 0 and 4, correspond to the minimum of different criterias ('lowercase', 'uppercase', 'symbol', 'number') that should be met to pass the password strength
+  - minLength: minimum length of the password that should be met to pass the password strength
+
+The minDiversity and minLength parameters of the first element cannot be overriden (set to 0 at the beginning of the method). Therefore, the first element should always correspond to a "too weak" option.
+
 ```
 passwordStrength('myPassword', yourCustomOptions)
 ```
