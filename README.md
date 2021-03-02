@@ -173,5 +173,7 @@ Contributions & pull requests are welcome!
 
 I'll be glad if you give this project a ★ on [Github](https://github.com/deanilvincent/check-password-strength) :)
 
+***
+Kudos to [@Ennoriel](https://github.com/Ennoriel) and his efforts for making v2.0.0 possible!
 ### License
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/deanilvincent/check-password-strength/blob/master/LICENSE.md/) file for details.
