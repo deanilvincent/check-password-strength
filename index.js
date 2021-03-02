@@ -1,4 +1,4 @@
-defaultOptions = [
+const defaultOptions = [
   {
     id: 0,
     value: "Too weak",
@@ -25,7 +25,7 @@ defaultOptions = [
   }
 ]
 
-passwordStrength = (password, options = defaultOptions, allowedSymbols="!@#$%^&*") => {
+const passwordStrength = (password, options = defaultOptions, allowedSymbols="!@#$%^&*") => {
   
   let passwordCopy = password || ''
 
