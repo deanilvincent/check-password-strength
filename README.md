@@ -14,24 +14,6 @@ A simple way to check that password strength of a certain passphrase. A password
 
 `npm i check-password-strength --save`
 
-## Migration from 1.x.x to 2.0.O
-
-```
-// 1.x.x
-const whateEverYourFunctionNameWasBefore = require("./index");
-
-// 'contains' attribute of the response object format was
-response.contains = [{'message': 'lowercase'}, ...]
-```
-
-```
-// 2.0.0
-const { passwordStrength : whateEverYourFunctionNameWasBefore } = require("./index");
-
-// 'contains' attribute of the response object format is now
-response.contains = ['lowercase', ...]
-```
-
 ## Setup & Basic Usage
 ```
 const passwordStrength = require('check-password-strength')
@@ -48,7 +30,23 @@ console.log(passwordStrength('Asd1234!').value)
 console.log(passwordStrength('A@2asdF2020!!*').value)
 // Strong
 ```
+## Migration from 1.x.x to 2.0.0
 
+```
+// 1.x.x
+const whateEverYourFunctionNameWasBefore = require("./index");
+
+// 'contains' attribute of the response object format was
+response.contains = [{'message': 'lowercase'}, ...]
+```
+
+```
+// 2.0.0
+const { passwordStrength : whateEverYourFunctionNameWasBefore } = require("./index");
+
+// 'contains' attribute of the response object format is now
+response.contains = ['lowercase', ...]
+```
 ## Additional Info
 
 ### Object Result
@@ -174,6 +172,6 @@ Contributions & pull requests are welcome!
 I'll be glad if you give this project a ★ on [Github](https://github.com/deanilvincent/check-password-strength) :)
 
 ***
-Kudos to [@Ennoriel](https://github.com/Ennoriel) and his efforts for making v2.0.0 possible!
+Kudos to [@Ennoriel](https://github.com/Ennoriel) and his efforts for making v2.x.x possible!
 ### License
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/deanilvincent/check-password-strength/blob/master/LICENSE.md/) file for details.
