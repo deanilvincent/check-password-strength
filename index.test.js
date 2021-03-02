@@ -1,4 +1,10 @@
-const app = require("./index");
+const {passwordStrength: app, defaultOptions} = require("./index");
+
+it("Should not modify the password parameter", () => {
+  let pwd = "Hello!"
+  app(pwd)
+  expect(pwd).toBe("Hello!")
+})
 
 it("Should return strength id 3 if password is Strong", () => {
   expect(app("A@2asdF2020!!*!").id).toBe(3);
@@ -77,45 +83,45 @@ it("Should return true if request for contains is an array", () => {
 
 it("Should return contains of 'lowercase' if the password has lowercase", () => {
   const contains = app("lower").contains;
-  const contain = contains.find((x) => x.message === "lowercase");
-  const condition = contain.message === "lowercase";
+  const contain = contains.find((x) => x === "lowercase");
+  const condition = contain === "lowercase";
   expect(condition).toEqual(true);
 });
 
 it("Should return contains of 'uppercase' if the password has uppercase", () => {
   const contains = app("Uppercase").contains;
-  const contain = contains.find((x) => x.message === "uppercase");
-  const condition = contain.message === "uppercase";
+  const contain = contains.find((x) => x === "uppercase");
+  const condition = contain === "uppercase";
   expect(condition).toEqual(true);
 });
 
 it("Should return contains of 'symbol' if the password has symbol", () => {
   const contains = app("!test").contains;
-  const contain = contains.find((x) => x.message === "symbol");
-  const condition = contain.message === "symbol";
+  const contain = contains.find((x) => x === "symbol");
+  const condition = contain === "symbol";
   expect(condition).toEqual(true);
 });
 
 it("Should return contains of 'number' if the password has number", () => {
   const contains = app("1234").contains;
-  const contain = contains.find((x) => x.message === "number");
-  const condition = contain.message === "number";
+  const contain = contains.find((x) => x === "number");
+  const condition = contain === "number";
   expect(condition).toEqual(true);
 });
 
 it("Should return contains of all criteria (lowercase, uppercase, symbol & number)", () => {
   expect(app("asdfASDF!@#$1234").contains).toStrictEqual([
-    { message: "lowercase" },
-    { message: "uppercase" },
-    { message: "number" },
-    { message: "symbol" },
+    "lowercase",
+    "uppercase",
+    "number",
+    "symbol",
   ]);
 });
 
 it("Should return contains of two or more message if the password has 2 or more message password criteria", () => {
   expect(app("asdfASDF").contains).toStrictEqual([
-    { message: "lowercase" },
-    { message: "uppercase" },
+    "lowercase",
+    "uppercase",
   ]);
 });
 
@@ -132,9 +138,10 @@ it("Should return type of number if request is for length value", () => {
   expect(typeof app("1234").length).toBe("number");
 });
 
-// exception
-it("Should throw an exception if password parameter is empty", () => {
-  expect(() => app(null)).toThrow("Password is empty.");
+it("Should return an empty password result if password parameter is null", () => {
+  expect(app(null).id).toBe(0);
+  expect(app(null).length).toBe(0);
+  expect(app(null).contains).toStrictEqual([]);
 });
 
 overridenOptions = [
@@ -191,44 +198,51 @@ it("[overridden options] Should return true if request for contains is an array"
 
 it("[overridden options] Should return contains of 'lowercase' if the password has lowercase", () => {
   const contains = app("lower", overridenOptions).contains;
-  const contain = contains.find((x) => x.message === "lowercase");
-  const condition = contain.message === "lowercase";
+  const contain = contains.find((x) => x === "lowercase");
+  const condition = contain === "lowercase";
   expect(condition).toEqual(true);
 });
 
 it("[overridden options] Should return contains of 'uppercase' if the password has uppercase", () => {
   const contains = app("Uppercase", overridenOptions).contains;
-  const contain = contains.find((x) => x.message === "uppercase");
-  const condition = contain.message === "uppercase";
+  const contain = contains.find((x) => x === "uppercase");
+  const condition = contain === "uppercase";
   expect(condition).toEqual(true);
 });
 
 it("[overridden options] Should return contains of 'symbol' if the password has symbol", () => {
   const contains = app("!test", overridenOptions).contains;
-  const contain = contains.find((x) => x.message === "symbol");
-  const condition = contain.message === "symbol";
+  const contain = contains.find((x) => x === "symbol");
+  const condition = contain === "symbol";
   expect(condition).toEqual(true);
 });
 
 it("[overridden options] Should return contains of 'number' if the password has number", () => {
   const contains = app("1234", overridenOptions).contains;
-  const contain = contains.find((x) => x.message === "number");
-  const condition = contain.message === "number";
+  const contain = contains.find((x) => x === "number");
+  const condition = contain === "number";
   expect(condition).toEqual(true);
+});
+
+it("[overridden options] Should return the same object with the default option", () => {
+  expect(app("abcd@")).toStrictEqual(app('abdc@', defaultOptions))
+  expect(app("abcd@E")).toStrictEqual(app('abdc@E', defaultOptions))
+  expect(app("abcd@3")).toStrictEqual(app('abdc@3', defaultOptions))
+  expect(app(null)).toStrictEqual(app(null, defaultOptions))
 });
 
 it("[overridden allowedSymbols] Should not contains symbols if the password does not have one", () => {
   const contains = app("abcd@", undefined, '$').contains;
-  expect(contains.map(c => c.message)).toEqual(expect.arrayContaining(['lowercase']));
-  expect(contains.map(c => c.message)).toEqual(expect.not.arrayContaining(['uppercase']));
-  expect(contains.map(c => c.message)).toEqual(expect.not.arrayContaining(['number']));
-  expect(contains.map(c => c.message)).toEqual(expect.not.arrayContaining(['symbol']));
+  expect(contains).toEqual(expect.arrayContaining(['lowercase']));
+  expect(contains).toEqual(expect.not.arrayContaining(['uppercase']));
+  expect(contains).toEqual(expect.not.arrayContaining(['number']));
+  expect(contains).toEqual(expect.not.arrayContaining(['symbol']));
 });
 
 it("[overridden allowedSymbols] Should contains symbols if the password have one", () => {
   const contains = app("abcd@Ê", undefined, 'Ê').contains;
-  expect(contains.map(c => c.message)).toEqual(expect.arrayContaining(['lowercase']));
-  expect(contains.map(c => c.message)).toEqual(expect.not.arrayContaining(['uppercase']));
-  expect(contains.map(c => c.message)).toEqual(expect.not.arrayContaining(['number']));
-  expect(contains.map(c => c.message)).toEqual(expect.arrayContaining(['symbol']));
+  expect(contains).toEqual(expect.arrayContaining(['lowercase']));
+  expect(contains).toEqual(expect.not.arrayContaining(['uppercase']));
+  expect(contains).toEqual(expect.not.arrayContaining(['number']));
+  expect(contains).toEqual(expect.arrayContaining(['symbol']));
 });
