@@ -5,7 +5,7 @@ export interface Option {
   minLength: number;
 }
 
-interface FirstOption extends Option {
+export interface FirstOption extends Option {
   minDiversity: 0;
   minLength: 0;
 }
@@ -14,9 +14,9 @@ export type Options = [FirstOption, ...Option[]];
 
 export const defaultOptions: Options;
 
-type DiversityType = "lowercase" | "uppercase" | "symbol" | "number";
+export type DiversityType = "lowercase" | "uppercase" | "symbol" | "number";
 
-interface Result {
+export interface Result {
   id: number;
   value?: string;
   contains: DiversityType[];
