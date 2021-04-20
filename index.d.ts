@@ -26,5 +26,5 @@ export interface Result<V> {
 export function passwordStrength<V = string>(
   password: string,
   options?: Options<V>,
-  allowedSymbols?: string
+  allowedSymbols?: string,
 ): Result<V>;
