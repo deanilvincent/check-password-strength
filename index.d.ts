@@ -1,6 +1,6 @@
 export interface Option<V> {
   id: number;
-  value?: V;
+  value: V;
   minDiversity: number;
   minLength: number;
 }
@@ -18,7 +18,7 @@ export type DiversityType = "lowercase" | "uppercase" | "symbol" | "number";
 
 export interface Result<V> {
   id: number;
-  value?: V;
+  value: V;
   contains: DiversityType[];
   length: number;
 }
