@@ -246,3 +246,23 @@ it("[overridden allowedSymbols] Should contains symbols if the password have one
   expect(contains).toEqual(expect.not.arrayContaining(['number']));
   expect(contains).toEqual(expect.arrayContaining(['symbol']));
 });
+
+it("[overridden allowedSymbols] Should contains symbols if allowedSymbol is a special regex char", () => {
+  expect(app("[", undefined, '[]').contains).toEqual(expect.arrayContaining(['symbol']));
+  expect(app("]", undefined, '[]').contains).toEqual(expect.arrayContaining(['symbol']));
+  expect(app("(", undefined, '()').contains).toEqual(expect.arrayContaining(['symbol']));
+  expect(app(")", undefined, '()').contains).toEqual(expect.arrayContaining(['symbol']));
+  expect(app("{", undefined, '{}').contains).toEqual(expect.arrayContaining(['symbol']));
+  expect(app("}", undefined, '{}').contains).toEqual(expect.arrayContaining(['symbol']));
+  expect(app("*", undefined, '*').contains).toEqual(expect.arrayContaining(['symbol']));
+  expect(app("^", undefined, '^').contains).toEqual(expect.arrayContaining(['symbol']));
+  expect(app("/", undefined, '/').contains).toEqual(expect.arrayContaining(['symbol']));
+  expect(app("\\", undefined, '\\').contains).toEqual(expect.arrayContaining(['symbol']));
+  expect(app("-", undefined, '-').contains).toEqual(expect.arrayContaining(['symbol']));
+  expect(app("=", undefined, '=').contains).toEqual(expect.arrayContaining(['symbol']));
+  expect(app("?", undefined, '?').contains).toEqual(expect.arrayContaining(['symbol']));
+  expect(app("+", undefined, '+').contains).toEqual(expect.arrayContaining(['symbol']));
+  expect(app(".", undefined, '.').contains).toEqual(expect.arrayContaining(['symbol']));
+  expect(app("$", undefined, '$').contains).toEqual(expect.arrayContaining(['symbol']));
+  expect(app("[](){}*^/\\-=?+.$", undefined, '[](){}*^/\\-=?+.$').contains).toEqual(expect.arrayContaining(['symbol']));
+});
