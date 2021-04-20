@@ -25,6 +25,8 @@ const defaultOptions = [
   }
 ]
 
+const escapeRegExp = (string) => string.replace(/[-.*+?^${}()|[\]\\]/g, '\\$&')
+
 const passwordStrength = (password, options = defaultOptions, allowedSymbols="!@#$%^&*") => {
   
   let passwordCopy = password || ''
@@ -49,7 +51,7 @@ const passwordStrength = (password, options = defaultOptions, allowedSymbols="!@
 
   if (allowedSymbols) {
     rules.push({
-      regex: `[${allowedSymbols}]`,
+      regex: `[${escapeRegExp(allowedSymbols)}]`,
       message: 'symbol'
     })
   }
