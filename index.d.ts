@@ -1,30 +1,30 @@
-export interface Option {
+export interface Option<V> {
   id: number;
-  value?: string;
+  value?: V;
   minDiversity: number;
   minLength: number;
 }
 
-export interface FirstOption extends Option {
+export interface FirstOption<V> extends Option<V> {
   minDiversity: 0;
   minLength: 0;
 }
 
-export type Options = [FirstOption, ...Option[]];
+export type Options<V> = [FirstOption<V>, ...Option<V>[]];
 
-export const defaultOptions: Options;
+export const defaultOptions: Options<string>;
 
 export type DiversityType = "lowercase" | "uppercase" | "symbol" | "number";
 
-export interface Result {
+export interface Result<V> {
   id: number;
-  value?: string;
+  value?: V;
   contains: DiversityType[];
   length: number;
 }
 
-export function passwordStrength(
+export function passwordStrength<V = string>(
   password: string,
-  options?: Options,
+  options?: Options<V>,
   allowedSymbols?: string
-): Result;
+): Result<V>;
