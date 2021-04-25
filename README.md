@@ -16,7 +16,9 @@ A simple way to check that password strength of a certain passphrase. A password
 
 ## Setup & Basic Usage
 ```
-const passwordStrength = require('check-password-strength')
+const { passwordStrength } = require('check-password-strength')
+// OR
+import { passwordStrength } from 'check-password-strength'
 
 console.log(passwordStrength('asdfasdf').value)
 // Too weak (It will return Too weak if the value doesn't match the RegEx conditions)
@@ -125,7 +127,6 @@ The minDiversity and minLength parameters of the first element cannot be overrid
 ```
 passwordStrength('myPassword', yourCustomOptions)
 ```
-
 ### RegEx 
 
 **Strong**
@@ -150,6 +151,9 @@ passwordStrength('myPassword', yourCustomOptions)
 | (?=.{10,}) | The string must be eight characters or longer for Strong strength |
 | (?=.{8,}) | The string must be eight characters or longer for Medium strength |
 | (?=.{6,}) | Mininum of 6 characters for Weak strength |
+
+## TypeScript type declarations &#9745; 
+Available starting version `v2.0.3` and above. (Thanks to [@Mesoptier!](https://github.com/Mesoptier))
 
 ## Other resources
 
