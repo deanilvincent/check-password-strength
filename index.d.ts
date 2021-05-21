@@ -16,6 +16,8 @@ export const defaultOptions: Options<string>;
 
 export type DiversityType = "lowercase" | "uppercase" | "symbol" | "number";
 
+export type StrengthType = 'Too weak' | 'Weak' | 'Medium' | 'Strong';
+
 export interface Result<V> {
   id: number;
   value: V;
@@ -23,7 +25,7 @@ export interface Result<V> {
   length: number;
 }
 
-export function passwordStrength<V = string>(
+export function passwordStrength<V = StrengthType>(
   password: string,
   options?: Options<V>,
   allowedSymbols?: string,
