@@ -15,7 +15,7 @@ A simple way to check that password strength of a certain passphrase. A password
 `npm i check-password-strength --save`
 
 ## Setup & Basic Usage
-```
+```javascript
 const { passwordStrength } = require('check-password-strength')
 // OR
 import { passwordStrength } from 'check-password-strength'
@@ -34,7 +34,7 @@ console.log(passwordStrength('A@2asdF2020!!*').value)
 ```
 ## Migration from 1.x.x to 2.0.0
 
-```
+```javascript
 // 1.x.x
 const whateEverYourFunctionNameWasBefore = require("./index");
 
@@ -42,7 +42,7 @@ const whateEverYourFunctionNameWasBefore = require("./index");
 response.contains = [{'message': 'lowercase'}, ...]
 ```
 
-```
+```javascript
 // 2.0.0
 const { passwordStrength : whateEverYourFunctionNameWasBefore } = require("./index");
 
@@ -67,7 +67,7 @@ response.contains = ['lowercase', ...]
 | Medium | 4 | 8 |
 | Strong | 4 | 10 |
 
-```
+```javascript
 console.log(passwordStrength('@Sdfasd2020!@#$'))
 // output 
 { 
@@ -81,12 +81,12 @@ console.log(passwordStrength('@Sdfasd2020!@#$'))
 ### Default Options
 
 the default options can be required:
-```
+```javascript
 const { defaultOptions } = require("./index");
 ```
 
 default options:
-```
+```javascript
 [
   {
     id: 0,
@@ -124,7 +124,7 @@ To override the default options, simply pass your custom array as the second arg
 
 The minDiversity and minLength parameters of the first element cannot be overriden (set to 0 at the beginning of the method). Therefore, the first element should always correspond to a "too weak" option.
 
-```
+```javascript
 passwordStrength('myPassword', yourCustomOptions)
 ```
 ### RegEx 
