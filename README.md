@@ -8,7 +8,9 @@ A simple way to check that password strength of a certain passphrase. A password
 
 [![Downloads](https://img.shields.io/npm/dt/check-password-strength.svg)](https://img.shields.io/npm/dt/check-password-strength.svg)
 
-[DEMO here](https://check-password-strength.netlify.app/) 
+[DEMO 1](https://svelte.dev/repl/b5bf5871c99742e584da244b4bfeac92?version=3.44.3) by [@Ennoriel](https://github.com/Ennoriel)
+
+[DEMO 2](https://check-password-strength.netlify.app/)
 
 ## Installation
 
@@ -122,7 +124,7 @@ To override the default options, simply pass your custom array as the second arg
   - minDiversity: between 0 and 4, correspond to the minimum of different criterias ('lowercase', 'uppercase', 'symbol', 'number') that should be met to pass the password strength
   - minLength: minimum length of the password that should be met to pass the password strength
 
-The minDiversity and minLength parameters of the first element cannot be overriden (set to 0 at the beginning of the method). Therefore, the first element should always correspond to a "too weak" option.
+The `minDiversity` and `minLength` parameters of the first element cannot be overriden (set to 0 at the beginning of the method). Therefore, the first element should always correspond to a "too weak" option.
 
 ```javascript
 passwordStrength('myPassword', yourCustomOptions)
