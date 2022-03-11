@@ -10,6 +10,145 @@ it("Should return strength id 3 if password is Strong", () => {
   expect(app("A@2asdF2020!!*!").id).toBe(3);
 });
 
+//#region INTRODUCE UPDATED DEFAULT SYMBOLS AND TEST EACH SYMBOL
+it("Should return strength id 3 if password is Strong with these symbols: !\"#\$%&'\(\)\*\+,-\./:;<=>\?@\[\\]\^_`\{|\}~", () => {
+  expect(app("A20abcdefg!\"#\$%&'\(\)\*\+,-\./:;<=>\?@\[\\]\^_`\{|\}~").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: !", () => {
+  expect(app("A20abcdefg!").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: @", () => {
+  expect(app("A20abcdefg@").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: #", () => {
+  expect(app("A20abcdefg#").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: ^", () => {
+  expect(app("A20abcdefg^").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: &", () => {
+  expect(app("A20abcdefg&").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: *", () => {
+  expect(app("A20abcdefg*").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: !", () => {
+  expect(app("A20abcdefg!").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: \"", () => {
+  expect(app("A20abcdefg\"").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: '", () => {
+  expect(app("A20abcdefg'").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: (", () => {
+  expect(app("A20abcdefg(").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: )", () => {
+  expect(app("A20abcdefg)").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: +", () => {
+  expect(app("A20abcdefg+").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: ,", () => {
+  expect(app("A20abcdefg,").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: -", () => {
+  expect(app("A20abcdefg-").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: .", () => {
+  expect(app("A20abcdefg.").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: /", () => {
+  expect(app("A20abcdefg/").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: :", () => {
+  expect(app("A20abcdefg:").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: ;", () => {
+  expect(app("A20abcdefg;").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: <", () => {
+  expect(app("A20abcdefg>").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: =", () => {
+  expect(app("A20abcdefg=").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: >", () => {
+  expect(app("A20abcdefg>").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: ?", () => {
+  expect(app("A20abcdefg?").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: [", () => {
+  expect(app("A20abcdefg[").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: ]", () => {
+  expect(app("A20abcdefg]").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: \\", () => {
+  expect(app("A20abcdefg\\").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: \\", () => {
+  expect(app("A20abcdefg\\").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: ^", () => {
+  expect(app("A20abcdefg^").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: _", () => {
+  expect(app("A20abcdefg_").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: `", () => {
+  expect(app("A20abcdefg`").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: {", () => {
+  expect(app("A20abcdefg{").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: }", () => {
+  expect(app("A20abcdefg}").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: |", () => {
+  expect(app("A20abcdefg|").id).toBe(3);
+});
+
+it("Should return strength id 3 if password is Strong with symbol: ~", () => {
+  expect(app("A20abcdefg~").id).toBe(3);
+});
+
+//#endregion
+
 it("Should return strength id 2 if password is Medium", () => {
   expect(app("Asd1234!").id).toBe(2);
 });
@@ -245,24 +384,4 @@ it("[overridden allowedSymbols] Should contains symbols if the password have one
   expect(contains).toEqual(expect.not.arrayContaining(['uppercase']));
   expect(contains).toEqual(expect.not.arrayContaining(['number']));
   expect(contains).toEqual(expect.arrayContaining(['symbol']));
-});
-
-it("[overridden allowedSymbols] Should contains symbols if allowedSymbol is a special regex char", () => {
-  expect(app("[", undefined, '[]').contains).toEqual(expect.arrayContaining(['symbol']));
-  expect(app("]", undefined, '[]').contains).toEqual(expect.arrayContaining(['symbol']));
-  expect(app("(", undefined, '()').contains).toEqual(expect.arrayContaining(['symbol']));
-  expect(app(")", undefined, '()').contains).toEqual(expect.arrayContaining(['symbol']));
-  expect(app("{", undefined, '{}').contains).toEqual(expect.arrayContaining(['symbol']));
-  expect(app("}", undefined, '{}').contains).toEqual(expect.arrayContaining(['symbol']));
-  expect(app("*", undefined, '*').contains).toEqual(expect.arrayContaining(['symbol']));
-  expect(app("^", undefined, '^').contains).toEqual(expect.arrayContaining(['symbol']));
-  expect(app("/", undefined, '/').contains).toEqual(expect.arrayContaining(['symbol']));
-  expect(app("\\", undefined, '\\').contains).toEqual(expect.arrayContaining(['symbol']));
-  expect(app("-", undefined, '-').contains).toEqual(expect.arrayContaining(['symbol']));
-  expect(app("=", undefined, '=').contains).toEqual(expect.arrayContaining(['symbol']));
-  expect(app("?", undefined, '?').contains).toEqual(expect.arrayContaining(['symbol']));
-  expect(app("+", undefined, '+').contains).toEqual(expect.arrayContaining(['symbol']));
-  expect(app(".", undefined, '.').contains).toEqual(expect.arrayContaining(['symbol']));
-  expect(app("$", undefined, '$').contains).toEqual(expect.arrayContaining(['symbol']));
-  expect(app("[](){}*^/\\-=?+.$", undefined, '[](){}*^/\\-=?+.$').contains).toEqual(expect.arrayContaining(['symbol']));
 });
