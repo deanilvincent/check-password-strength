@@ -115,6 +115,10 @@ it("Should return strength id 3 if password is Strong with symbol: \\", () => {
   expect(app("A20abcdefg\\").id).toBe(3);
 });
 
+it("Should return strength id 3 if password is Strong with symbol: \\", () => {
+  expect(app("A20abcdefg\\").id).toBe(3);
+});
+
 it("Should return strength id 3 if password is Strong with symbol: ^", () => {
   expect(app("A20abcdefg^").id).toBe(3);
 });
