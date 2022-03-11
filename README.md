@@ -54,20 +54,20 @@ response.contains = ['lowercase', ...]
 ## Additional Info
 
 ### Object Result
-| Property| Desc. |
-| -- | -- |
-| id | **0** = Too weak, **1** = Weak & **2** = Medium, **3** = Strong |
-| value | Too weak, Weak, Medium & Strong |
-| contains | lowercase, uppercase, symbol and/or number |
-| length | length of the password |
+| Property | Desc.                                                           |
+| -------- | --------------------------------------------------------------- |
+| id       | **0** = Too weak, **1** = Weak & **2** = Medium, **3** = Strong |
+| value    | Too weak, Weak, Medium & Strong                                 |
+| contains | lowercase, uppercase, symbol and/or number                      |
+| length   | length of the password                                          |
 
 ### Password Length Default Options
-| Name | Mininum Diversity | Mininum Length |
-| -- | -- | -- |
-| Too weak | 0 | 0 |
-| Weak | 2 | 6 |
-| Medium | 4 | 8 |
-| Strong | 4 | 10 |
+| Name     | Mininum Diversity | Mininum Length |
+| -------- | ----------------- | -------------- |
+| Too weak | 0                 | 0              |
+| Weak     | 2                 | 6              |
+| Medium   | 4                 | 8              |
+| Strong   | 4                 | 10             |
 
 ```javascript
 console.log(passwordStrength('@Sdfasd2020!@#$'))
@@ -82,7 +82,13 @@ console.log(passwordStrength('@Sdfasd2020!@#$'))
 
 ### Default Options
 
-the default options can be required:
+The default symbols are based from **Password Special Characters [OWASP](https://owasp.org/www-community/password-special-characters)** list (except for the space)
+```
+!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+```
+Thanks for [jlherren](https://github.com/jlherren) & [Ennoriel](https://github.com/Ennoriel) for this suggestion! 👨🏻‍💻👨🏻‍💻
+
+The default options can be required:
 ```javascript
 const { defaultOptions } = require("./index");
 ```
@@ -129,30 +135,27 @@ The `minDiversity` and `minLength` parameters of the first element cannot be ove
 ```javascript
 passwordStrength('myPassword', yourCustomOptions)
 ```
-### RegEx 
-
+### RegEx
 **Strong**
-
- `^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{10,})`
+```
+ ^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*"'()+,-./:;<=>?[\]^_`{|}~])(?=.{10,})
+ ```
 
 **Medium Password RegEx used:** 
+```
+ ^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*"'()+,-./:;<=>?[\]^_`{|}~])(?=.{8,})
+ ```
 
- `^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})`
-
-**Weak Password RegEx used:**  
-
-`^((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[!@#\$%\^&\*])|((?=.*[a-z])(?=.*[!@#\$%\^&\*])|((?=.*[0-9])(?=.*[!@#\$%\^&\*]))(?=.{6,})"`
-
-|RegEx| Desc. |
-|--|--|
-| ^ | The password string will start this way |
-| (?=.*[a-z]) | The string must contain at least 1 lowercase alphabetical character | 
-|(?=.*[A-Z]) | The string must contain at least 1 uppercase alphabetical character |
-|(?=.*[0-9]) | The string must contain at least 1 numeric character |
-|(?=._[!@#\$%\^&_]) | The string must contain at least one special character, but we are escaping reserved RegEx characters to avoid conflict |
-| (?=.{10,}) | The string must be eight characters or longer for Strong strength |
-| (?=.{8,}) | The string must be eight characters or longer for Medium strength |
-| (?=.{6,}) | Mininum of 6 characters for Weak strength |
+| RegEx                                     | Desc.                                                               |
+| ----------------------------------------- | ------------------------------------------------------------------- |
+| ^                                         | The password string will start this way                             |
+| (?=.*[a-z])                               | The string must contain at least 1 lowercase alphabetical character |
+| (?=.*[A-Z])                               | The string must contain at least 1 uppercase alphabetical character |
+| (?=.*[0-9])                               | The string must contain at least 1 numeric character                |
+| (?=.[!"#$%&'()*+,-./:;<=>?@[\\]^_`{\|}~])) | The string must contain at least one special character              |
+| (?=.{10,})                                | The string must be eight characters or longer for Strong strength   |
+| (?=.{8,})                                 | The string must be eight characters or longer for Medium strength   |
+| (?=.{6,})                                 | Mininum of 6 characters for Weak strength                           |
 
 ## TypeScript type declarations &#9745; 
 Available starting version `v2.0.3` and above. (Thanks to [@Mesoptier!](https://github.com/Mesoptier))
