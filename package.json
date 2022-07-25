@@ -3,8 +3,11 @@
   "version": "2.0.5",
   "description": "A NPM Password strength checker based from Javascript RegExp. Check passphrase if it's \"Weak\", \"Medium\" or \"Strong\"",
   "main": "index.js",
+  "browser": "dist/umd.js",
+  "module": "dist/es.js",
   "types": "index.d.ts",
   "scripts": {
+    "build": "rollup -c",
     "test": "jest",
     "test:types": "tsd"
   },
@@ -39,6 +42,7 @@
   "homepage": "https://github.com/deanilvincent/check-password-strength#readme",
   "devDependencies": {
     "jest": "^26.4.2",
+    "rollup": "^2.77.0",
     "tsd": "^0.14.0"
   }
 }
