@@ -14,7 +14,13 @@ A simple way to check that password strength of a certain passphrase. A password
 
 ## Installation
 
+### Install via Package Manager
+
 `npm i check-password-strength --save`
+
+### Install via Browser Script Tag using [UNPKG](https://unpkg.com/)
+
+`<script src="https://unpkg.com/check-password-strength/dist/umd.js"></script>`
 
 ## Setup & Basic Usage
 ```javascript
