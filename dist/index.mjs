@@ -1,3 +1,9 @@
+function getDefaultExportFromCjs (x) {
+	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+}
+
+var src = {exports: {}};
+
 const defaultOptions = [
   {
     id: 0,
@@ -25,12 +31,12 @@ const defaultOptions = [
   }
 ];
 
-const passwordStrength = (password, options = defaultOptions, allowedSymbols="!\"#\$%&'\(\)\*\+,-\./:;<=>\?@\[\\\\\\]\^_`\{|\}~") => {
-  
+const passwordStrength = (password, options = defaultOptions, allowedSymbols = "!\"#\$%&'\(\)\*\+,-\./:;<=>\?@\[\\\\\\]\^_`\{|\}~") => {
+
   let passwordCopy = password || '';
 
   options[0].minDiversity = 0,
-  options[0].minLength = 0;
+    options[0].minLength = 0;
 
   const rules = [
     {
@@ -66,12 +72,18 @@ const passwordStrength = (password, options = defaultOptions, allowedSymbols="!\
     .filter(option => strength.contains.length >= option.minDiversity)
     .filter(option => strength.length >= option.minLength)
     .sort((o1, o2) => o2.id - o1.id)
-    .map(option => ({id: option.id, value: option.value}));
+    .map(option => ({ id: option.id, value: option.value }));
 
   Object.assign(strength, fulfilledOptions[0]);
 
   return strength;
 };
 
-module.exports = { passwordStrength, defaultOptions };
-//# sourceMappingURL=es.js.map
+src.exports = { passwordStrength, defaultOptions };
+var passwordStrength_1 = src.exports.passwordStrength = passwordStrength;
+var defaultOptions_1 = src.exports.defaultOptions = defaultOptions;
+
+var srcExports = src.exports;
+var index = /*@__PURE__*/getDefaultExportFromCjs(srcExports);
+
+export { index as default, defaultOptions_1 as defaultOptions, passwordStrength_1 as passwordStrength };

@@ -1,4 +1,5 @@
-const {passwordStrength: app, defaultOptions} = require("./index");
+const { passwordStrength: app, defaultOptions } = require("../dist/index");
+const cp = require('child_process');
 
 it("Should not modify the password parameter", () => {
   let pwd = "Hello!"
@@ -384,4 +385,31 @@ it("[overridden allowedSymbols] Should contains symbols if the password have one
   expect(contains).toEqual(expect.not.arrayContaining(['uppercase']));
   expect(contains).toEqual(expect.not.arrayContaining(['number']));
   expect(contains).toEqual(expect.arrayContaining(['symbol']));
+});
+
+it("[cjs execution] Should require commonJs script", async (done) => {
+  const command = "node test/cjs.cjs --pwd aze456"
+
+  await cp.exec(command, (_stderr, stdout) => {
+    expect(stdout.trim()).toStrictEqual("Weak")
+    done();
+  });
+});
+
+it("[cjs execution] Should require umd script", async (done) => {
+  const command = "node test/umd.cjs --pwd aze456"
+
+  await cp.exec(command, (_stderr, stdout) => {
+    expect(stdout.trim()).toStrictEqual("Weak")
+    done();
+  });
+});
+
+it("[es execution] Should import esModule script", async (done) => {
+  const command = "node test/es.mjs --pwd aze456"
+
+  await cp.exec(command, (_stderr, stdout) => {
+    expect(stdout.trim()).toStrictEqual("Weak")
+    done();
+  });
 });

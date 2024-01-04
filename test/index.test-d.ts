@@ -1,5 +1,5 @@
 import { expectType } from "tsd";
-import { DiversityType, passwordStrength } from "./index";
+import { DiversityType, passwordStrength } from "../dist/index";
 
 // Test result types
 expectType<string>(passwordStrength("asdfasdf").value);
@@ -42,25 +42,25 @@ expectType<{ message: string, color: string }>(
   passwordStrength("asdfasdf", [
     {
       id: 0,
-      value: {message: "Too weak", color: "red"},
+      value: { message: "Too weak", color: "red" },
       minDiversity: 0,
       minLength: 0,
     },
     {
       id: 1,
-      value: {message: "Weak", color: "orange"},
+      value: { message: "Weak", color: "orange" },
       minDiversity: 2,
       minLength: 6,
     },
     {
       id: 2,
-      value: {message: "Medium", color: "yellow"},
+      value: { message: "Medium", color: "yellow" },
       minDiversity: 4,
       minLength: 8,
     },
     {
       id: 3,
-      value: {message: "Strong", color: "green"},
+      value: { message: "Strong", color: "green" },
       minDiversity: 4,
       minLength: 10,
     },
