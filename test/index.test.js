@@ -400,6 +400,7 @@ it("[cjs execution] Should require umd script", async (done) => {
   const command = "node test/umd.cjs --pwd aze456"
 
   await cp.exec(command, (_stderr, stdout) => {
+    if (_stderr) console.error("error:", JSON.stringify(_stderr, null, 2))
     expect(stdout.trim()).toStrictEqual("Weak")
     done();
   });
@@ -409,6 +410,7 @@ it("[es execution] Should import esModule script", async (done) => {
   const command = "node test/es.mjs --pwd aze456"
 
   await cp.exec(command, (_stderr, stdout) => {
+    if (_stderr) console.error("error:", JSON.stringify(_stderr, null, 2))
     expect(stdout.trim()).toStrictEqual("Weak")
     done();
   });
