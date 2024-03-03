@@ -3,9 +3,9 @@
 
 A simple way to check that password strength of a certain passphrase. A password strength checker based from [Javascript RegEx](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions).
 
-[![npm](https://img.shields.io/npm/dm/check-password-strength.svg)](https://img.shields.io/npm/dm/check-password-strength.svg)
+[![Build status](https://dev.azure.com/dv-github-repos/check-password-strength/_apis/build/status/check-password-strength-CI)](https://dev.azure.com/dv-github-repos/check-password-strength/_build/latest?definitionId=12) 
 
-[![Downloads](https://img.shields.io/npm/dt/check-password-strength.svg)](https://img.shields.io/npm/dt/check-password-strength.svg)
+[![npm](https://img.shields.io/npm/dm/check-password-strength.svg)](https://img.shields.io/npm/dm/check-password-strength.svg) [![Downloads](https://img.shields.io/npm/dt/check-password-strength.svg)](https://img.shields.io/npm/dt/check-password-strength.svg)
 
 [DEMO 1](https://svelte.dev/repl/b5bf5871c99742e584da244b4bfeac92?version=3.44.3) by [@Ennoriel](https://github.com/Ennoriel)
 
@@ -39,23 +39,7 @@ console.log(passwordStrength('Asd1234!').value)
 console.log(passwordStrength('A@2asdF2020!!*').value)
 // Strong
 ```
-## Migration from 1.x.x to 2.0.0
 
-```javascript
-// 1.x.x
-const whateEverYourFunctionNameWasBefore = require("./index");
-
-// 'contains' attribute of the response object format was
-response.contains = [{'message': 'lowercase'}, ...]
-```
-
-```javascript
-// 2.0.0
-const { passwordStrength : whateEverYourFunctionNameWasBefore } = require("./index");
-
-// 'contains' attribute of the response object format is now
-response.contains = ['lowercase', ...]
-```
 ## Additional Info
 
 ### Object Result
