@@ -39,23 +39,7 @@ console.log(passwordStrength('Asd1234!').value)
 console.log(passwordStrength('A@2asdF2020!!*').value)
 // Strong
 ```
-## Migration from 1.x.x to 2.0.0
 
-```javascript
-// 1.x.x
-const whateEverYourFunctionNameWasBefore = require("./index");
-
-// 'contains' attribute of the response object format was
-response.contains = [{'message': 'lowercase'}, ...]
-```
-
-```javascript
-// 2.0.0
-const { passwordStrength : whateEverYourFunctionNameWasBefore } = require("./index");
-
-// 'contains' attribute of the response object format is now
-response.contains = ['lowercase', ...]
-```
 ## Additional Info
 
 ### Object Result
