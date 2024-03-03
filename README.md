@@ -3,11 +3,9 @@
 
 A simple way to check that password strength of a certain passphrase. A password strength checker based from [Javascript RegEx](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions).
 
-[![Build status](https://dev.azure.com/dv-github-repos/check-password-strength/_apis/build/status/check-password-strength-CI)](https://dev.azure.com/dv-github-repos/check-password-strength/_build/latest?definitionId=12)
+[![Build status](https://dev.azure.com/dv-github-repos/check-password-strength/_apis/build/status/check-password-strength-CI)](https://dev.azure.com/dv-github-repos/check-password-strength/_build/latest?definitionId=12) 
 
-[![npm](https://img.shields.io/npm/dm/check-password-strength.svg)](https://img.shields.io/npm/dm/check-password-strength.svg)
-
-[![Downloads](https://img.shields.io/npm/dt/check-password-strength.svg)](https://img.shields.io/npm/dt/check-password-strength.svg)
+[![npm](https://img.shields.io/npm/dm/check-password-strength.svg)](https://img.shields.io/npm/dm/check-password-strength.svg) [![Downloads](https://img.shields.io/npm/dt/check-password-strength.svg)](https://img.shields.io/npm/dt/check-password-strength.svg)
 
 [DEMO 1](https://svelte.dev/repl/b5bf5871c99742e584da244b4bfeac92?version=3.44.3) by [@Ennoriel](https://github.com/Ennoriel)
 
