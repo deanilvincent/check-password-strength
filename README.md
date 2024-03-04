@@ -19,7 +19,12 @@ A simple way to check that password strength of a certain passphrase. A password
 
 ### Install via Browser Script Tag using [UNPKG](https://unpkg.com/)
 
-`<script src="https://unpkg.com/check-password-strength/dist/umd.js"></script>`
+```html
+<script src="https://unpkg.com/check-password-strength/dist/umd.js"></script>
+<script type="text/javascript">
+    const passwordStrength = checkPasswordStrength.passwordStrength('pwd123').value; // 'Weak'
+</script>
+```
 
 ## Setup & Basic Usage
 ```javascript
@@ -28,7 +33,7 @@ const { passwordStrength } = require('check-password-strength')
 import { passwordStrength } from 'check-password-strength'
 
 console.log(passwordStrength('asdfasdf').value)
-// Too weak (It will return Too weak if the value doesn't match the RegEx conditions)
+// Too weak (It will return Too weak if the value doesn't match the Weak conditions)
 
 console.log(passwordStrength('asdf1234').value)
 // Weak
