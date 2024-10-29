@@ -147,7 +147,7 @@ passwordStrength('myPassword', yourCustomOptions)
 | (?=.*[A-Z])                               | The string must contain at least 1 uppercase alphabetical character |
 | (?=.*[0-9])                               | The string must contain at least 1 numeric character                |
 | (?=.[!"#$%&'()*+,-./:;<=>?@[\\]^_`{\|}~])) | The string must contain at least one special character              |
-| (?=.{10,})                                | The string must be eight characters or longer for Strong strength   |
+| (?=.{10,})                                | The string must be ten characters or longer for Strong strength     |
 | (?=.{8,})                                 | The string must be eight characters or longer for Medium strength   |
 | (?=.{6,})                                 | Mininum of 6 characters for Weak strength                           |
 
