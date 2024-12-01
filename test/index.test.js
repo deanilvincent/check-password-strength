@@ -60,14 +60,14 @@ it.each([
 ])(
   "Should return strength id 3 if password is Strong with symbol: s",
   (symbol) => {
-    expect(passwordStrength(`A20abcdefg${symbol}`).id).toBe(3);
+    expect(passwordStrength(`A20abcdefgh${symbol}`).id).toBe(3);
   }
 );
 
 //#endregion
 
 it("Should return strength id 2 if password is Medium", () => {
-  expect(passwordStrength("Asd1234!").id).toBe(2);
+  expect(passwordStrength("Asd123456!").id).toBe(2);
 });
 
 it("Should return strength id 1 if password is Weak", () => {
@@ -95,7 +95,7 @@ it("Should return strength value 'Strong' if password is Medium", () => {
 });
 
 it("Should return strength value 'Medium' if password is Medium", () => {
-  expect(passwordStrength("Asd1234!").value).toBe("Medium");
+  expect(passwordStrength("Asd123456!").value).toBe("Medium");
 });
 
 it("Should return strength value 'Weak' if password is Weak", () => {
@@ -211,19 +211,19 @@ overridenOptions = [
     id: 1,
     value: "Weak",
     minDiversity: 2,
-    minLength: 6,
+    minLength: 8,
   },
   {
     id: 2,
     value: "Medium",
     minDiversity: 3,
-    minLength: 8,
+    minLength: 10,
   },
   {
     id: 3,
     value: "Strong",
     minDiversity: 4,
-    minLength: 10,
+    minLength: 12,
   },
 ];
 
@@ -329,7 +329,7 @@ it("[overridden restrictSymbolsTo] Should not contains symbols if the password h
 });
 
 it("[cjs execution] Should require commonJs script", async (done) => {
-  const command = "node test/cjs.cjs --pwd aze456";
+  const command = "node test/cjs.cjs --pwd aze45678";
 
   await cp.exec(command, (_stderr, stdout) => {
     expect(stdout.trim()).toStrictEqual("Weak");
@@ -338,7 +338,7 @@ it("[cjs execution] Should require commonJs script", async (done) => {
 });
 
 it("[cjs execution] Should require umd script", async (done) => {
-  const command = "node test/umd.cjs --pwd aze456";
+  const command = "node test/umd.cjs --pwd aze45678";
 
   await cp.exec(command, (_stderr, stdout) => {
     if (_stderr) console.error("error:", JSON.stringify(_stderr, null, 2));
@@ -348,7 +348,7 @@ it("[cjs execution] Should require umd script", async (done) => {
 });
 
 it("[es execution] Should import esModule script", async (done) => {
-  const command = "node test/es.mjs --pwd aze456";
+  const command = "node test/es.mjs --pwd aze45678";
 
   await cp.exec(command, (_stderr, stdout) => {
     if (_stderr) console.error("error:", JSON.stringify(_stderr, null, 2));

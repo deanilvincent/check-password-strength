@@ -58,16 +58,12 @@ The `passwordStrength` takes 3 arguments:
 
 **Password Default Options**
 
-| Name     | Mininum Diversity | Mininum Length |
-| -------- | ----------------- | -------------- |
-| Too weak | 0                 | 0              |
-| Weak     | 2                 | 6              |
-| Medium   | 4                 | 8              |
-| Strong   | 4                 | 10             |
-
 The default options can be required:
+
 ```javascript
 const { defaultOptions } = require("./index");
+// OR
+import { defaultOptions } from 'check-password-strength'
 ```
 
 default options:
@@ -83,19 +79,19 @@ default options:
     id: 1,
     value: "Weak",
     minDiversity: 2,
-    minLength: 6
+    minLength: 8
   },
   {
     id: 2,
     value: "Medium",
     minDiversity: 4,
-    minLength: 8
+    minLength: 10
   },
   {
     id: 3,
     value: "Strong",
     minDiversity: 4,
-    minLength: 10
+    minLength: 12
   }
 ]
 ```
@@ -132,7 +128,7 @@ I'll be glad if you give this project a ★ on [Github](https://github.com/deani
 
 ## changelog
 
-- v3: allow all symbols by default (any character except the 26 latin lowercase, uppercase letters and 10 digits)
+- v3: allow all symbols by default (any character except the 26 latin lowercase, uppercase letters and 10 digits) & set the default min length to 12 instead of 10
 - v2: allow configuration through `options` object
 - v1: first version
 
