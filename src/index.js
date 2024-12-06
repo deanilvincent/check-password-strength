@@ -1,3 +1,5 @@
+import escapeStringRegexp from "escape-string-regexp";
+
 const defaultOptions = [
   {
     id: 0,
@@ -25,7 +27,7 @@ const defaultOptions = [
   },
 ];
 
-const owaspSymbols = "!\"#$%&'()*+,-./:;<=>?@[\\\\\\]^_`{|}~";
+const owaspSymbols = "!\"#$%&'()*+,-./\\:;<=>?@[]^_`{|}~";
 
 const passwordStrength = (
   password,
@@ -53,7 +55,7 @@ const passwordStrength = (
     },
     {
       key: "symbol",
-      regex: restrictSymbolsTo ? `[${restrictSymbolsTo}]` : "[^a-zA-Z0-9]",
+      regex: restrictSymbolsTo ? `[${escapeStringRegexp(restrictSymbolsTo)}]` : "[^a-zA-Z0-9]",
     },
   ];
 
@@ -76,7 +78,5 @@ const passwordStrength = (
   return strength;
 };
 
-module.exports = { passwordStrength, defaultOptions, owaspSymbols };
-module.exports.passwordStrength = passwordStrength;
-module.exports.defaultOptions = defaultOptions;
-module.exports.owaspSymbols = owaspSymbols;
+export default { passwordStrength, defaultOptions, owaspSymbols }
+export { passwordStrength, defaultOptions, owaspSymbols }

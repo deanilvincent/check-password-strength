@@ -20,7 +20,7 @@ A simple way to check that password strength of a certain passphrase. The librar
 ### Install via Browser Script Tag using [UNPKG](https://unpkg.com/)
 
 ```html
-<script src="https://unpkg.com/check-password-strength/dist/umd.js"></script>
+<script src="https://unpkg.com/check-password-strength/dist/umd.cjs"></script>
 <script type="text/javascript">
     const passwordStrength = checkPasswordStrength.passwordStrength('pwd123').value; // 'Weak'
 </script>
@@ -53,8 +53,11 @@ console.log(passwordStrength('A@2asdF2020!!*').value)
 The `passwordStrength` takes 3 arguments:
 
 - `password` (string): the user password
-- `options` (array — optional): an option to override the default complexity required to match your password policy
-- `restrictSymbolsTo` (string — optional): by default, `passwordStrength` will check against all character except the 26 latin lowercase, uppercase letters and 10 digits (includes the OWASP characters, accentuated letters, other alphabets, emojis). If you want to restrict it, you may pass a different string. You may import and use `owaspSymbols` that will restrict the symbols to the ones recommended by the OWASP.
+- `options` (array — optional): an option to override the default complexity required to match your password policy. See below.
+- `restrictSymbolsTo` (string — optional): 
+  - By default, the `passwordStrength` function checks against all characters except for the 26 Latin lowercase letters, 26 uppercase letters, and 10 digits. This includes OWASP-recommended characters, accented letters, other alphabets, and emojis.
+  - If you wish to apply restrictions, you can provide a custom string. This string should consist of unescaped symbol characters, which will be utilized internally in a RegExp expression in the following format: `[${escapeStringRegexp(restrictSymbolsTo)}]`.
+  - Additionally, you can import and use the owaspSymbols to limit the symbols to those recommended by OWASP.
 
 **Password Default Options**
 
@@ -103,7 +106,7 @@ To override the default options, simply pass your custom array as the second arg
   - minDiversity: between 0 and 4, correspond to the minimum of different criterias ('lowercase', 'uppercase', 'symbol', 'number') that should be met to pass the password strength
   - minLength: minimum length of the password that should be met to pass the password strength
 
-The `minDiversity` and `minLength` parameters of the first element cannot be overriden (set to 0 at the beginning of the method). Therefore, the first element should always correspond to a "too weak" option.
+**You can use an array containing fewer or more than four items to define the levels of trust.** However, the first element must have both the minDiversity and minLength parameters set to 0. This means that the first element should always represent a "too weak" option.
 
 ### Result
 

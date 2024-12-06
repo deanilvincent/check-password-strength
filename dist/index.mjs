@@ -1,8 +1,4 @@
-function getDefaultExportFromCjs (x) {
-	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
-}
-
-var src = {exports: {}};
+import escapeStringRegexp from 'escape-string-regexp';
 
 const defaultOptions = [
   {
@@ -31,7 +27,7 @@ const defaultOptions = [
   },
 ];
 
-const owaspSymbols = "!\"#$%&'()*+,-./:;<=>?@[\\\\\\]^_`{|}~";
+const owaspSymbols = "!\"#$%&'()*+,-./\\:;<=>?@[]^_`{|}~";
 
 const passwordStrength = (
   password,
@@ -59,7 +55,7 @@ const passwordStrength = (
     },
     {
       key: "symbol",
-      regex: restrictSymbolsTo ? `[${restrictSymbolsTo}]` : "[^a-zA-Z0-9]",
+      regex: restrictSymbolsTo ? `[${escapeStringRegexp(restrictSymbolsTo)}]` : "[^a-zA-Z0-9]",
     },
   ];
 
@@ -82,12 +78,6 @@ const passwordStrength = (
   return strength;
 };
 
-src.exports = { passwordStrength, defaultOptions, owaspSymbols };
-var passwordStrength_1 = src.exports.passwordStrength = passwordStrength;
-var defaultOptions_1 = src.exports.defaultOptions = defaultOptions;
-var owaspSymbols_1 = src.exports.owaspSymbols = owaspSymbols;
+var index = { passwordStrength, defaultOptions, owaspSymbols };
 
-var srcExports = src.exports;
-var index = /*@__PURE__*/getDefaultExportFromCjs(srcExports);
-
-export { index as default, defaultOptions_1 as defaultOptions, owaspSymbols_1 as owaspSymbols, passwordStrength_1 as passwordStrength };
+export { index as default, defaultOptions, owaspSymbols, passwordStrength };

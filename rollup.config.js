@@ -1,7 +1,8 @@
 import commonjs from '@rollup/plugin-commonjs';
 import terser from '@rollup/plugin-terser';
 import copy from 'rollup-plugin-copy'
-import pkg from './package.json';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import pkg from './package.json' with {type: "json"};
 
 export default [
 	{
@@ -13,7 +14,17 @@ export default [
 				name: 'checkPasswordStrength'
 			},
 		],
-		plugins: [commonjs(), terser()]
+		plugins: [commonjs(), nodeResolve(), terser()]
+	},
+	{
+		input: 'src/index.js',
+		output: [
+			{
+				file: pkg.main,
+				format: 'cjs',
+			},
+		],
+		plugins: [commonjs(), nodeResolve()]
 	},
 	{
 		input: 'src/index.js',
@@ -27,7 +38,7 @@ export default [
 			commonjs(),
 			copy({
 				targets: [
-					{ src: 'src/*', dest: 'dist' }
+					{ src: 'src/index.d.ts', dest: 'dist' }
 				]
 			})
 		]

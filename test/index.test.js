@@ -1,9 +1,10 @@
-const {
+import { expect, it } from 'vitest'
+import {
   passwordStrength,
   defaultOptions,
   owaspSymbols,
-} = require("../dist/index");
-const cp = require("child_process");
+} from "../dist/index";
+import { execSync } from "child_process";
 
 it("Should not modify the password parameter", () => {
   let pwd = "Hello!";
@@ -58,7 +59,7 @@ it.each([
   "~",
   "😛",
 ])(
-  "Should return strength id 3 if password is Strong with symbol: s",
+  "Should return strength id 3 if password is Strong with symbol: %s",
   (symbol) => {
     expect(passwordStrength(`A20abcdefgh${symbol}`).id).toBe(3);
   }
@@ -200,7 +201,7 @@ it("Should return an empty password result if password parameter is null", () =>
   expect(passwordStrength(null).contains).toStrictEqual([]);
 });
 
-overridenOptions = [
+const overridenOptions = [
   {
     id: 0,
     value: "Too weak",
@@ -328,31 +329,29 @@ it("[overridden restrictSymbolsTo] Should not contains symbols if the password h
   expect(contains).toEqual(expect.not.arrayContaining(["symbol"]));
 });
 
-it("[cjs execution] Should require commonJs script", async (done) => {
+// see https://github.com/deanilvincent/check-password-strength/pull/81
+it.each(["x$x", "x&x", "x&$x", "x$&x"])("[overridden restrictSymbolsTo] Should match symbols with etch cases: %s", (str) => {
+  const contains = passwordStrength(str, undefined, "$][&").contains;
+  expect(contains).toEqual(expect.arrayContaining(["symbol"]));
+});
+
+it("[cjs execution] Should require commonJs script", () => {
   const command = "node test/cjs.cjs --pwd aze45678";
 
-  await cp.exec(command, (_stderr, stdout) => {
-    expect(stdout.trim()).toStrictEqual("Weak");
-    done();
-  });
+  const result = execSync(command);
+  expect(result.toString().trim()).toStrictEqual("Weak")
 });
 
-it("[cjs execution] Should require umd script", async (done) => {
+it("[cjs execution] Should require umd script", () => {
   const command = "node test/umd.cjs --pwd aze45678";
 
-  await cp.exec(command, (_stderr, stdout) => {
-    if (_stderr) console.error("error:", JSON.stringify(_stderr, null, 2));
-    expect(stdout.trim()).toStrictEqual("Weak");
-    done();
-  });
+  const result = execSync(command);
+  expect(result.toString().trim()).toStrictEqual("Weak")
 });
 
-it("[es execution] Should import esModule script", async (done) => {
+it("[es execution] Should import esModule script", () => {
   const command = "node test/es.mjs --pwd aze45678";
 
-  await cp.exec(command, (_stderr, stdout) => {
-    if (_stderr) console.error("error:", JSON.stringify(_stderr, null, 2));
-    expect(stdout.trim()).toStrictEqual("Weak");
-    done();
-  });
+  const result = execSync(command);
+  expect(result.toString().trim()).toStrictEqual("Weak")
 });

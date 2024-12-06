@@ -1,3 +1,19 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+function escapeStringRegexp(string) {
+	if (typeof string !== 'string') {
+		throw new TypeError('Expected a string');
+	}
+
+	// Escape characters with special meaning either inside or outside character sets.
+	// Use a simple backslash escape when it’s always valid, and a `\xnn` escape when the simpler form would be disallowed by Unicode patterns’ stricter grammar.
+	return string
+		.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
+		.replace(/-/g, '\\x2d');
+}
+
 const defaultOptions = [
   {
     id: 0,
@@ -25,7 +41,7 @@ const defaultOptions = [
   },
 ];
 
-const owaspSymbols = "!\"#$%&'()*+,-./:;<=>?@[\\\\\\]^_`{|}~";
+const owaspSymbols = "!\"#$%&'()*+,-./\\:;<=>?@[]^_`{|}~";
 
 const passwordStrength = (
   password,
@@ -53,7 +69,7 @@ const passwordStrength = (
     },
     {
       key: "symbol",
-      regex: restrictSymbolsTo ? `[${restrictSymbolsTo}]` : "[^a-zA-Z0-9]",
+      regex: restrictSymbolsTo ? `[${escapeStringRegexp(restrictSymbolsTo)}]` : "[^a-zA-Z0-9]",
     },
   ];
 
@@ -76,7 +92,9 @@ const passwordStrength = (
   return strength;
 };
 
-module.exports = { passwordStrength, defaultOptions, owaspSymbols };
-module.exports.passwordStrength = passwordStrength;
-module.exports.defaultOptions = defaultOptions;
-module.exports.owaspSymbols = owaspSymbols;
+var index = { passwordStrength, defaultOptions, owaspSymbols };
+
+exports.default = index;
+exports.defaultOptions = defaultOptions;
+exports.owaspSymbols = owaspSymbols;
+exports.passwordStrength = passwordStrength;

@@ -8,7 +8,7 @@
   "scripts": {
     "build": "rm -rf dist && rollup -c",
     "test": "npm run test:lib && npm run test:types",
-    "test:lib": "jest",
+    "test:lib": "vitest --disable-console-intercept",
     "test:types": "tsd"
   },
   "repository": {
@@ -41,14 +41,19 @@
   },
   "homepage": "https://github.com/deanilvincent/check-password-strength#readme",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-commonjs": "^28.0.1",
+    "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-terser": "^0.4.4",
-    "jest": "^26.4.2",
-    "rollup": "^2.77.0",
+    "jest": "^29.7.0",
+    "rollup": "^4.28.0",
     "rollup-plugin-copy": "^3.5.0",
-    "tsd": "^0.14.0"
+    "tsd": "^0.31.2",
+    "vitest": "^2.1.8"
   },
   "tsd": {
-		"directory": "test"
-	}
+    "directory": "test"
+  },
+  "dependencies": {
+    "escape-string-regexp": "^5.0.0"
+  }
 }
