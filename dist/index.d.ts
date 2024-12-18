@@ -14,6 +14,8 @@ export type Options<V> = [FirstOption<V>, ...Option<V>[]];
 
 export const defaultOptions: Options<string>;
 
+export const owaspSymbols: string;
+
 export type DiversityType = "lowercase" | "uppercase" | "symbol" | "number";
 
 export interface Result<V> {
@@ -26,5 +28,5 @@ export interface Result<V> {
 export function passwordStrength<V = string>(
   password: string,
   options?: Options<V>,
-  allowedSymbols?: string,
+  restrictSymbolsTo?: string | undefined,
 ): Result<V>;

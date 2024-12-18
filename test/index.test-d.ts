@@ -20,19 +20,19 @@ expectType<string>(
       id: 1,
       value: "Weak",
       minDiversity: 2,
-      minLength: 6,
+      minLength: 8,
     },
     {
       id: 2,
       value: "Medium",
       minDiversity: 4,
-      minLength: 8,
+      minLength: 10,
     },
     {
       id: 3,
       value: "Strong",
       minDiversity: 4,
-      minLength: 10,
+      minLength: 12,
     },
   ]).value
 );

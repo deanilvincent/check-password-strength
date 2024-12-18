@@ -1,7 +1,7 @@
 
 # Overview
 
-A simple way to check that password strength of a certain passphrase. A password strength checker based from [Javascript RegEx](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions).
+A simple way to check that password strength of a certain passphrase. The library is fully typed.
 
 [![Build status](https://dev.azure.com/dv-github-repos/check-password-strength/_apis/build/status/check-password-strength-CI)](https://dev.azure.com/dv-github-repos/check-password-strength/_build/latest?definitionId=12) 
 
@@ -20,13 +20,14 @@ A simple way to check that password strength of a certain passphrase. A password
 ### Install via Browser Script Tag using [UNPKG](https://unpkg.com/)
 
 ```html
-<script src="https://unpkg.com/check-password-strength/dist/umd.js"></script>
+<script src="https://unpkg.com/check-password-strength/dist/umd.cjs"></script>
 <script type="text/javascript">
     const passwordStrength = checkPasswordStrength.passwordStrength('pwd123').value; // 'Weak'
 </script>
 ```
 
 ## Setup & Basic Usage
+
 ```javascript
 const { passwordStrength } = require('check-password-strength')
 // OR
@@ -45,46 +46,27 @@ console.log(passwordStrength('A@2asdF2020!!*').value)
 // Strong
 ```
 
-## Additional Info
+## API
 
-### Object Result
-| Property | Desc.                                                           |
-| -------- | --------------------------------------------------------------- |
-| id       | **0** = Too weak, **1** = Weak & **2** = Medium, **3** = Strong |
-| value    | Too weak, Weak, Medium & Strong                                 |
-| contains | lowercase, uppercase, symbol and/or number                      |
-| length   | length of the password                                          |
+### arguments
 
-### Password Length Default Options
-| Name     | Mininum Diversity | Mininum Length |
-| -------- | ----------------- | -------------- |
-| Too weak | 0                 | 0              |
-| Weak     | 2                 | 6              |
-| Medium   | 4                 | 8              |
-| Strong   | 4                 | 10             |
+The `passwordStrength` takes 3 arguments:
 
-```javascript
-console.log(passwordStrength('@Sdfasd2020!@#$'))
-// output 
-{ 
-    "id": 1, 
-    "value": "Strong",
-    "contains": ['lowercase', 'uppercase', 'symbol', 'number'],
-    "length": 15
-}
-```
+- `password` (string): the user password
+- `options` (array — optional): an option to override the default complexity required to match your password policy. See below.
+- `restrictSymbolsTo` (string — optional): 
+  - By default, the `passwordStrength` function checks against all characters except for the 26 Latin lowercase letters, 26 uppercase letters, and 10 digits. This includes OWASP-recommended characters, accented letters, other alphabets, and emojis.
+  - If you wish to apply restrictions, you can provide a custom string. This string should consist of unescaped symbol characters, which will be utilized internally in a RegExp expression in the following format: `[${escapeStringRegexp(restrictSymbolsTo)}]`.
+  - Additionally, you can import and use the owaspSymbols to limit the symbols to those recommended by OWASP.
 
-### Default Options
-
-The default symbols are based from **Password Special Characters [OWASP](https://owasp.org/www-community/password-special-characters)** list (except for the space)
-```
-!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
-```
-Thanks for [jlherren](https://github.com/jlherren) & [Ennoriel](https://github.com/Ennoriel) for this suggestion! 👨🏻‍💻👨🏻‍💻
+**Password Default Options**
 
 The default options can be required:
+
 ```javascript
 const { defaultOptions } = require("./index");
+// OR
+import { defaultOptions } from 'check-password-strength'
 ```
 
 default options:
@@ -100,19 +82,19 @@ default options:
     id: 1,
     value: "Weak",
     minDiversity: 2,
-    minLength: 6
+    minLength: 8
   },
   {
     id: 2,
     value: "Medium",
     minDiversity: 4,
-    minLength: 8
+    minLength: 10
   },
   {
     id: 3,
     value: "Strong",
     minDiversity: 4,
-    minLength: 10
+    minLength: 12
   }
 ]
 ```
@@ -124,49 +106,22 @@ To override the default options, simply pass your custom array as the second arg
   - minDiversity: between 0 and 4, correspond to the minimum of different criterias ('lowercase', 'uppercase', 'symbol', 'number') that should be met to pass the password strength
   - minLength: minimum length of the password that should be met to pass the password strength
 
-The `minDiversity` and `minLength` parameters of the first element cannot be overriden (set to 0 at the beginning of the method). Therefore, the first element should always correspond to a "too weak" option.
+**You can use an array containing fewer or more than four items to define the levels of trust.** However, the first element must have both the minDiversity and minLength parameters set to 0. This means that the first element should always represent a "too weak" option.
 
-```javascript
-passwordStrength('myPassword', yourCustomOptions)
-```
-### RegEx
-**Strong**
-```
- ^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*"'()+,-./:;<=>?[\]^_`{|}~])(?=.{10,})
- ```
+### Result
 
-**Medium Password RegEx used:** 
-```
- ^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*"'()+,-./:;<=>?[\]^_`{|}~])(?=.{8,})
- ```
+The result is an object containing the following values (unless you override the `options`):
 
-| RegEx                                     | Desc.                                                               |
-| ----------------------------------------- | ------------------------------------------------------------------- |
-| ^                                         | The password string will start this way                             |
-| (?=.*[a-z])                               | The string must contain at least 1 lowercase alphabetical character |
-| (?=.*[A-Z])                               | The string must contain at least 1 uppercase alphabetical character |
-| (?=.*[0-9])                               | The string must contain at least 1 numeric character                |
-| (?=.[!"#$%&'()*+,-./:;<=>?@[\\]^_`{\|}~])) | The string must contain at least one special character              |
-| (?=.{10,})                                | The string must be eight characters or longer for Strong strength   |
-| (?=.{8,})                                 | The string must be eight characters or longer for Medium strength   |
-| (?=.{6,})                                 | Mininum of 6 characters for Weak strength                           |
+| Property | Desc.                                                           |
+| -------- | --------------------------------------------------------------- |
+| id       | **0** = Too weak, **1** = Weak & **2** = Medium, **3** = Strong |
+| value    | Too weak, Weak, Medium & Strong                                 |
+| contains | lowercase, uppercase, number and / or symbol                    |
+| length   | length of the password                                          |
 
-## TypeScript type declarations &#9745; 
-Available starting version `v2.0.3` and above. (Thanks to [@Mesoptier!](https://github.com/Mesoptier))
+If you want to translate the value (Too weak → Trop faible), you can translate it based on the return value, or override the `defaultOptions` option, which will be passed back as the function's return value.
 
-## Other resources
-
-##### For .NET Project
-If you're working with .net core project, I've created a simple nuget package with same RegEx strings to validate a password strength.
-
-You can easily install via Nuget Package Manager or .NET CLI ([Check.Password.Strength](https://github.com/deanilvincent/Check.Password.Strength)). This package uses Regular Expression `new Regex()` derives from `System.Text.RegularExpressions`. You can use this especially if you want to validate the passcode strength on backend services or web apis of your project.
-
-##### Other NPM RegEx validator
-I also made another NPM package ([hey-regex](https://www.npmjs.com/package/hey-regex)) that checks common inputs like numbers (whole number and decimal), alpha numeric, email and url. This package only returns `true` or `false` based from the selected function (with RegEx `.test()` inside).
-
-Reference [blog](https://www.thepolyglotdeveloper.com/2015/05/use-regex-to-test-password-strength-in-javascript/).
-
-### Contribute
+## Contribute
 
 Feel free to clone or fork this project:  `https://github.com/deanilvincent/check-password-strength.git`
 
@@ -174,7 +129,12 @@ Contributions & pull requests are welcome!
 
 I'll be glad if you give this project a ★ on [Github](https://github.com/deanilvincent/check-password-strength) :)
 
+## changelog
+
+- v3: allow all symbols by default (any character except the 26 latin lowercase, uppercase letters and 10 digits) & set the default min length to 12 instead of 10
+- v2: allow configuration through `options` object
+- v1: first version
+
 ***
-Kudos to [@Ennoriel](https://github.com/Ennoriel) and his efforts for making v2.x.x possible!
-### License
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/deanilvincent/check-password-strength/blob/master/LICENSE.md/) file for details.
+
+Kudos to [@Ennoriel](https://github.com/Ennoriel) and his efforts for making v2 and v3 possible!
