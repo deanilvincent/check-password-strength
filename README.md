@@ -48,6 +48,42 @@ console.log(passwordStrength('A@2asdF2020!!*').value)
 // Strong
 ```
 
+## Enhanced Security Analysis (New!)
+
+The library now includes **entropy calculation** and **pattern detection** for advanced security analysis:
+
+```javascript
+const result = passwordStrength('Password123!');
+console.log(result);
+// {
+//   id: 3,
+//   value: "Strong",           // Traditional strength
+//   contains: ["lowercase", "uppercase", "number", "symbol"],
+//   length: 12,
+//   entropy: 3.1,              // NEW: Entropy in bits  
+//   entropyGrade: "Too weak",  // NEW: Entropy-based grade
+//   patterns: ["sequence", "dictionary"], // NEW: Detected weaknesses
+//   recommendations: [         // NEW: Security advice
+//     "Avoid sequential characters (abc, 123)",
+//     "Avoid common words"
+//   ]
+// }
+```
+
+### Entropy vs Traditional Strength
+
+Traditional strength checking can miss important vulnerabilities:
+
+```javascript
+// These score "Strong" traditionally but have low entropy:
+passwordStrength('Password123!');    // Traditional: Strong, Entropy: Too weak
+passwordStrength('qwertyuiop123');   // Traditional: Strong, Entropy: Too weak 
+passwordStrength('aaaaAAAA1111!!!!'); // Traditional: Strong, Entropy: Weak
+
+// Truly random passwords score high on both:
+passwordStrength('Tr7$mK9#pL2');     // Traditional: Strong, Entropy: Strong
+```
+
 ## API
 
 ### arguments
@@ -120,6 +156,33 @@ The result is an object containing the following values (unless you override the
 | value    | Too weak, Weak, Medium & Strong                                 |
 | contains | lowercase, uppercase, number and / or symbol                    |
 | length   | length of the password                                          |
+| **entropy** | **(NEW)** Password entropy in bits (measures unpredictability) |
+| **entropyGrade** | **(NEW)** Entropy-based strength: Too weak, Weak, Medium, Strong |
+| **patterns** | **(NEW)** Array of detected weakness patterns                  |
+| **recommendations** | **(NEW)** Array of security improvement suggestions      |
+
+#### Pattern Detection
+
+The library now detects common password weaknesses:
+
+- **sequence**: Sequential characters (abc, 123, etc.)
+- **repetition**: Repeated characters (aaa, 111, etc.)  
+- **keyboard**: Keyboard patterns (qwerty, asdf, etc.)
+- **dictionary**: Common dictionary words
+
+#### Security Recommendations
+
+Based on detected patterns, the library provides actionable security advice:
+
+```javascript
+const result = passwordStrength('qwerty123');
+console.log(result.recommendations);
+// [
+//   "Avoid sequential characters (abc, 123)",
+//   "Avoid keyboard patterns (qwerty, asdf)",  
+//   "Consider using a longer password"
+// ]
+```
 
 If you want to translate the value (Too weak → Trop faible), you can translate it based on the return value, or override the `defaultOptions` option, which will be passed back as the function's return value.
 

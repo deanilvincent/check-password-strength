@@ -23,6 +23,10 @@ export interface Result<V> {
   value: V;
   contains: DiversityType[];
   length: number;
+  entropy: number;
+  entropyGrade: string;
+  patterns: string[];
+  recommendations: string[];
 }
 
 export function passwordStrength<V = string>(
